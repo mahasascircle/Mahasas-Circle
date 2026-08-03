@@ -1,0 +1,253 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#07050d">
+<title>Silver Threads — Mahasa's Circle</title>
+<style>
+:root{
+  --night:#06040b;--panel:#110b19;--panel2:#191022;--text:#f3eef6;
+  --muted:#bdb2c5;--violet:#ba78ec;--violet2:#6d3892;--line:rgba(235,225,241,.18);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;min-height:100vh;color:var(--text);
+  background:
+    radial-gradient(circle at 75% 5%,rgba(115,55,154,.18),transparent 28%),
+    linear-gradient(180deg,#08050e,#050309);
+  font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
+}
+button,input,textarea,select{font:inherit}
+button{color:inherit}
+a{color:inherit;text-decoration:none}
+.shell{min-height:100vh;display:grid;grid-template-columns:230px 1fr}
+.sidebar{
+  position:sticky;top:0;height:100vh;padding:20px 15px;border-right:1px solid var(--line);
+  background:rgba(7,5,13,.96);backdrop-filter:blur(16px)
+}
+.brand{display:flex;align-items:center;gap:10px;padding:3px 8px 22px;font:14px Georgia,serif;letter-spacing:.09em}
+.brandmark{width:41px;height:41px;border-radius:50%;display:grid;place-items:center;border:1px solid rgba(235,225,241,.42);box-shadow:0 0 20px rgba(186,120,236,.24)}
+.nav{display:grid;gap:5px}
+.nav a{padding:11px 12px;border-radius:9px;color:var(--muted);display:flex;gap:10px;align-items:center;font-size:13px}
+.nav a:hover,.nav a.active{background:rgba(186,120,236,.13);color:#fff}
+.main{min-width:0}
+.topbar{
+  min-height:68px;position:sticky;top:0;z-index:10;display:flex;align-items:center;justify-content:space-between;
+  gap:12px;padding:10px 20px;border-bottom:1px solid var(--line);background:rgba(7,5,13,.90);backdrop-filter:blur(16px)
+}
+.search{position:relative;flex:1;max-width:520px}
+.search input{width:100%;padding:11px 14px 11px 39px;border:1px solid var(--line);border-radius:999px;background:rgba(255,255,255,.04);color:#fff}
+.search span{position:absolute;left:14px;top:9px;color:var(--muted)}
+.btn{border:1px solid var(--line);border-radius:9px;padding:11px 14px;background:rgba(255,255,255,.04);cursor:pointer}
+.btn.primary{background:linear-gradient(180deg,#843fb2,#50276c);border-color:#bc7de9;box-shadow:0 0 22px rgba(186,120,236,.25)}
+.content{max-width:1050px;margin:auto;padding:24px}
+.hero{padding:22px;border:1px solid var(--line);border-radius:17px;background:
+  radial-gradient(circle at 85% 12%,rgba(186,120,236,.18),transparent 28%),
+  linear-gradient(135deg,#191023,#0b0711)}
+.eyebrow{margin:0 0 7px;color:#c993ec;text-transform:uppercase;letter-spacing:.18em;font-size:10px}
+.hero h1{font:400 clamp(34px,5vw,52px) Georgia,serif;margin:0 0 7px}
+.hero p{margin:0;color:#ccc1d2;line-height:1.55}
+.filterrow{display:flex;gap:8px;flex-wrap:wrap;margin:15px 0}
+.filter{border:1px solid var(--line);border-radius:999px;padding:8px 11px;background:rgba(255,255,255,.03);cursor:pointer;color:var(--muted);font-size:12px}
+.filter.active{background:rgba(186,120,236,.15);border-color:rgba(197,139,237,.48);color:#fff}
+.layout{display:grid;grid-template-columns:minmax(0,1fr) 280px;gap:15px}
+.threadlist{display:grid;gap:12px}
+.thread{
+  border:1px solid var(--line);border-radius:15px;padding:17px;
+  background:linear-gradient(145deg,rgba(17,11,25,.96),rgba(9,6,14,.96))
+}
+.threadtop{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}
+.person{display:flex;gap:10px;align-items:center}
+.avatar{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(145deg,#734096,#25142f);border:1px solid #9f6ac8;font-family:Georgia,serif}
+.person b{font:15px Georgia,serif}.meta{color:var(--muted);font-size:11px;margin-top:3px}
+.badge{padding:6px 9px;border:1px solid var(--line);border-radius:999px;color:#c893eb;font-size:10px}
+.thread h2{font:400 21px Georgia,serif;margin:15px 0 7px}
+.thread p{margin:0;color:#d8cedd;line-height:1.55;font-size:14px}
+.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+.action{border:1px solid var(--line);border-radius:999px;padding:8px 11px;background:rgba(255,255,255,.025);cursor:pointer;font-size:12px;color:#cfc4d5}
+.action.lit{border-color:#b977ec;background:rgba(185,119,236,.16);color:#fff}
+.replies{margin-top:13px;border-top:1px solid rgba(235,225,241,.10);padding-top:11px;display:none}
+.replies.open{display:block}
+.reply{padding:10px 0;border-bottom:1px solid rgba(235,225,241,.08);font-size:13px;color:#d2c8d8}
+.reply:last-child{border-bottom:0}
+.replyform{display:flex;gap:8px;margin-top:10px}
+.replyform input{flex:1;min-width:0;padding:9px 11px;border:1px solid var(--line);border-radius:9px;background:rgba(0,0,0,.26);color:#fff}
+.sidecard{border:1px solid var(--line);border-radius:15px;background:rgba(15,9,22,.94);overflow:hidden;height:max-content}
+.sidecard h3{font:400 18px Georgia,serif;margin:0;padding:15px;border-bottom:1px solid var(--line)}
+.sidecard div{padding:13px 15px;border-bottom:1px solid rgba(235,225,241,.08);font-size:13px;color:#cfc5d4}
+.sidecard div:last-child{border-bottom:0}
+.modal{position:fixed;inset:0;z-index:100;display:none;place-items:center;padding:18px;background:rgba(2,1,5,.80);backdrop-filter:blur(13px)}
+.modal.open{display:grid}
+.dialog{width:min(560px,100%);border:1px solid rgba(215,181,238,.36);border-radius:20px;padding:22px;background:linear-gradient(145deg,#1a1024,#0a0710);box-shadow:0 30px 90px #000}
+.dialog h2{font:400 28px Georgia,serif;margin:0 0 15px}
+.field{display:grid;gap:6px;margin-top:12px}
+.field label{font-size:12px;color:#d6cadc}
+.field input,.field textarea,.field select{width:100%;padding:11px 12px;border:1px solid var(--line);border-radius:9px;background:rgba(0,0,0,.28);color:#fff}
+.dialogactions{display:flex;justify-content:flex-end;gap:8px;margin-top:17px}
+.toast{position:fixed;left:50%;bottom:20px;z-index:150;transform:translate(-50%,15px);opacity:0;padding:11px 15px;border-radius:999px;background:#eadff0;color:#17101c;transition:.24s;pointer-events:none}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+.mobilebar{display:none}
+@media(max-width:820px){
+  .shell{display:block}.sidebar{display:none}.topbar{padding:10px 12px}.content{padding:14px 12px 86px}.layout{grid-template-columns:1fr}.sidecard{display:none}
+  .topbar .primary{font-size:0;width:42px;height:42px;padding:0}.topbar .primary::after{content:"+";font-size:25px}
+  .mobilebar{display:grid;grid-template-columns:repeat(5,1fr);position:fixed;left:0;right:0;bottom:0;z-index:40;background:rgba(7,5,13,.97);border-top:1px solid var(--line);padding:7px 3px max(7px,env(safe-area-inset-bottom))}
+  .mobilebar a{display:grid;place-items:center;gap:3px;color:var(--muted);font-size:9px}.mobilebar span{font-size:18px}
+}
+</style>
+</head>
+<body>
+<div class="shell">
+<aside class="sidebar">
+  <a class="brand" href="dashboard.html"><span class="brandmark">🔥</span><span>MAHASA'S CIRCLE</span></a>
+  <nav class="nav">
+    <a href="dashboard.html">⌂ Home</a>
+    <a class="active" href="silver-threads.html">✧ Silver Threads</a>
+    <a href="hearths.html">🔥 Hearths</a>
+    <a href="local-circle.html">⌖ Local Circle</a>
+    <a href="gatherings.html">☾ Gatherings</a>
+    <a href="marketplace.html">◇ Marketplace</a>
+    <a href="library.html">▤ Library</a>
+  </nav>
+</aside>
+
+<main class="main">
+<header class="topbar">
+  <div class="search"><span>⌕</span><input id="searchInput" placeholder="Search Silver Threads" aria-label="Search Silver Threads"></div>
+  <button class="btn primary" id="newThreadBtn" type="button">Start a Thread</button>
+</header>
+
+<div class="content">
+  <section class="hero">
+    <p class="eyebrow">Conversations Woven in Silver</p>
+    <h1>Silver Threads</h1>
+    <p>Ask, teach, share, and support one another without chasing popularity or outrage.</p>
+  </section>
+
+  <div class="filterrow" id="filters">
+    <button class="filter active" data-filter="all">All Threads</button>
+    <button class="filter" data-filter="General Circle">General Circle</button>
+    <button class="filter" data-filter="Hecate's Hearth">Hecate's Hearth</button>
+    <button class="filter" data-filter="Herbalism">Herbalism</button>
+    <button class="filter" data-filter="Craftsmanship">Craftsmanship</button>
+  </div>
+
+  <div class="layout">
+    <section class="threadlist" id="threadList"></section>
+    <aside class="sidecard">
+      <h3>Thread Guidelines</h3>
+      <div>Lead with respect and curiosity.</div>
+      <div>Share experience without presenting opinion as fact.</div>
+      <div>Protect privacy and ask before offering personal readings.</div>
+      <div>Carry the Torch when a contribution genuinely helps.</div>
+    </aside>
+  </div>
+</div>
+</main>
+</div>
+
+<nav class="mobilebar">
+  <a href="dashboard.html"><span>⌂</span>Home</a>
+  <a href="silver-threads.html"><span>✧</span>Threads</a>
+  <a href="hearths.html"><span>🔥</span>Hearths</a>
+  <a href="local-circle.html"><span>⌖</span>Local</a>
+  <a href="marketplace.html"><span>◇</span>Market</a>
+</nav>
+
+<div class="modal" id="threadModal" role="dialog" aria-modal="true" aria-labelledby="newTitle">
+  <form class="dialog" id="threadForm">
+    <h2 id="newTitle">Start a Silver Thread</h2>
+    <div class="field"><label for="threadHearth">Hearth</label><select id="threadHearth"><option>General Circle</option><option>Hecate's Hearth</option><option>Herbalism</option><option>Craftsmanship</option></select></div>
+    <div class="field"><label for="threadTitle">Title</label><input id="threadTitle" maxlength="80" required placeholder="What would you like to discuss?"></div>
+    <div class="field"><label for="threadBody">Message</label><textarea id="threadBody" rows="6" maxlength="900" required placeholder="Share with care and intention."></textarea></div>
+    <div class="dialogactions"><button class="btn" id="cancelThread" type="button">Cancel</button><button class="btn primary" type="submit">Weave Thread</button></div>
+  </form>
+</div>
+<div class="toast" id="toast" role="status"></div>
+
+<script>
+const starterThreads = [
+  {id:"t1",author:"Ashley",initial:"A",hearth:"Hecate's Hearth",time:"18 minutes ago",title:"What does carrying the torch mean in your practice?",body:"For me it means helping someone find their own light without trying to choose their path for them. I would love to hear how others understand it.",torches:18,lit:false,replies:["Holding space without judgment is part of it for me.","Sometimes it is simply listening when someone feels alone."]},
+  {id:"t2",author:"Morgan",initial:"M",hearth:"Herbalism",time:"1 hour ago",title:"Safely drying and storing gathered herbs",body:"I added a beginner guide to the Library covering ethical gathering, drying times, labeling, moisture checks, and when not to use a plant.",torches:31,lit:false,replies:["Thank you for including safety and identification.","The labeling section was especially helpful."]},
+  {id:"t3",author:"Rowan",initial:"R",hearth:"Craftsmanship",time:"3 hours ago",title:"Working with naturally curved branches",body:"How do other wand makers decide whether to preserve a branch's natural bends or shape it into a straighter form?",torches:12,lit:false,replies:["I follow the grain and let the piece tell me what it wants to become."]}
+];
+
+let threads = JSON.parse(localStorage.getItem("mahasaThreads") || "null") || starterThreads;
+let activeFilter = "all";
+let query = "";
+
+const list = document.getElementById("threadList");
+const modal = document.getElementById("threadModal");
+const toast = document.getElementById("toast");
+
+function save(){ localStorage.setItem("mahasaThreads",JSON.stringify(threads)); }
+function escapeHTML(text){ return text.replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#039;"}[c])); }
+function notify(msg){ toast.textContent=msg;toast.classList.add("show");clearTimeout(window.toastTimer);window.toastTimer=setTimeout(()=>toast.classList.remove("show"),2200); }
+
+function render(){
+  const filtered = threads.filter(t=>{
+    const matchesFilter = activeFilter==="all" || t.hearth===activeFilter;
+    const haystack = (t.title+" "+t.body+" "+t.author+" "+t.hearth).toLowerCase();
+    return matchesFilter && haystack.includes(query.toLowerCase());
+  });
+
+  list.innerHTML = filtered.length ? filtered.map(t=>`
+    <article class="thread" data-id="${t.id}">
+      <div class="threadtop">
+        <div class="person"><div class="avatar">${escapeHTML(t.initial)}</div><div><b>${escapeHTML(t.author)}</b><div class="meta">${escapeHTML(t.hearth)} • ${escapeHTML(t.time)}</div></div></div>
+        <span class="badge">${escapeHTML(t.hearth)}</span>
+      </div>
+      <h2>${escapeHTML(t.title)}</h2>
+      <p>${escapeHTML(t.body)}</p>
+      <div class="actions">
+        <button class="action torch ${t.lit?"lit":""}" type="button">🔥 <span>${t.torches}</span> Torches</button>
+        <button class="action repliesBtn" type="button">💬 ${t.replies.length} Replies</button>
+        <button class="action bookmarkBtn" type="button">⌑ Bookmark</button>
+      </div>
+      <div class="replies">
+        <div class="replyItems">${t.replies.map(r=>`<div class="reply">${escapeHTML(r)}</div>`).join("")}</div>
+        <form class="replyform"><input maxlength="240" placeholder="Add a thoughtful reply" required><button class="btn primary" type="submit">Reply</button></form>
+      </div>
+    </article>`).join("") : '<div class="thread"><h2>No matching threads</h2><p>Try another search or start a new conversation.</p></div>';
+
+  list.querySelectorAll(".thread[data-id]").forEach(card=>{
+    const id=card.dataset.id;
+    const thread=threads.find(t=>t.id===id);
+    card.querySelector(".torch").onclick=()=>{
+      thread.lit=!thread.lit;
+      thread.torches += thread.lit ? 1 : -1;
+      save();render();notify(thread.lit?"You carried a Torch for this thread.":"Torch removed.");
+    };
+    card.querySelector(".repliesBtn").onclick=()=>card.querySelector(".replies").classList.toggle("open");
+    card.querySelector(".bookmarkBtn").onclick=()=>notify("Thread saved to your Bookmarks.");
+    card.querySelector(".replyform").onsubmit=e=>{
+      e.preventDefault();
+      const input=e.target.querySelector("input");
+      thread.replies.push(input.value.trim());
+      save();render();notify("Your reply was added.");
+    };
+  });
+}
+
+document.getElementById("searchInput").addEventListener("input",e=>{query=e.target.value;render();});
+document.querySelectorAll(".filter").forEach(btn=>btn.onclick=()=>{
+  document.querySelectorAll(".filter").forEach(b=>b.classList.remove("active"));
+  btn.classList.add("active");activeFilter=btn.dataset.filter;render();
+});
+document.getElementById("newThreadBtn").onclick=()=>{modal.classList.add("open");document.getElementById("threadTitle").focus();};
+document.getElementById("cancelThread").onclick=()=>modal.classList.remove("open");
+modal.addEventListener("click",e=>{if(e.target===modal)modal.classList.remove("open");});
+document.addEventListener("keydown",e=>{if(e.key==="Escape")modal.classList.remove("open");});
+document.getElementById("threadForm").onsubmit=e=>{
+  e.preventDefault();
+  const title=document.getElementById("threadTitle").value.trim();
+  const body=document.getElementById("threadBody").value.trim();
+  const hearth=document.getElementById("threadHearth").value;
+  threads.unshift({id:"u"+Date.now(),author:"Bill",initial:"B",hearth,time:"Just now",title,body,torches:0,lit:false,replies:[]});
+  save();e.target.reset();modal.classList.remove("open");render();notify("Your Silver Thread is now woven.");
+};
+render();
+</script>
+</body>
+</html>

@@ -1,0 +1,1069 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#050208">
+<meta name="description" content="Forge your personal sigil and light your first torch inside Mahasa's Circle.">
+<title>The Forge — Mahasa's Circle</title>
+<style>
+:root{
+  --night:#050208;
+  --panel:#100817;
+  --panel2:#190d24;
+  --text:#f5eff7;
+  --muted:#c4b7ca;
+  --violet:#bd78ef;
+  --violet2:#6d3592;
+  --silver:#e7dfea;
+  --gold:#e5bd79;
+  --line:rgba(235,225,241,.19);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  min-height:100svh;
+  color:var(--text);
+  background:
+    radial-gradient(circle at 50% 14%,rgba(117,51,153,.22),transparent 28%),
+    radial-gradient(circle at 50% 90%,rgba(65,22,88,.20),transparent 30%),
+    linear-gradient(180deg,#030106,#08030d 52%,#030106);
+  font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
+  overflow-x:hidden;
+}
+button,input,textarea,select{font:inherit}
+button{color:inherit}
+a{color:inherit;text-decoration:none}
+
+.forge-shell{
+  min-height:100svh;
+  display:grid;
+  grid-template-rows:auto 1fr auto;
+}
+.forge-top{
+  position:sticky;
+  top:0;
+  z-index:20;
+  display:grid;
+  grid-template-columns:auto 1fr auto;
+  align-items:center;
+  gap:12px;
+  min-height:72px;
+  padding:max(10px,env(safe-area-inset-top)) 18px 10px;
+  border-bottom:1px solid var(--line);
+  background:rgba(5,2,8,.80);
+  backdrop-filter:blur(18px);
+}
+.back,.help{
+  width:44px;height:44px;border-radius:50%;
+  border:1px solid var(--line);
+  background:rgba(255,255,255,.035);
+  display:grid;place-items:center;
+  cursor:pointer;
+}
+.forge-progress{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:7px;
+}
+.progress-step{
+  width:33px;height:33px;border-radius:50%;
+  display:grid;place-items:center;
+  border:1px solid rgba(235,225,241,.20);
+  color:#7f7486;
+  background:#0b0710;
+  font-size:12px;
+  transition:.25s;
+}
+.progress-step.active{
+  color:#fff;
+  border-color:#c47ff0;
+  background:#6d3592;
+  box-shadow:0 0 18px rgba(189,120,239,.45);
+}
+.progress-step.done{
+  color:#fff;
+  background:#4f2670;
+  border-color:#9f63c9;
+}
+.progress-line{
+  width:34px;height:1px;
+  background:rgba(235,225,241,.17);
+}
+.progress-line.done{
+  background:linear-gradient(90deg,#7e3da4,#c47ff0);
+  box-shadow:0 0 8px rgba(189,120,239,.45);
+}
+
+.forge-main{
+  width:min(1180px,100%);
+  margin:0 auto;
+  padding:28px 20px 110px;
+}
+.intro{
+  text-align:center;
+  margin-bottom:20px;
+}
+.kicker{
+  margin:0 0 8px;
+  color:#c993ec;
+  text-transform:uppercase;
+  letter-spacing:.2em;
+  font-size:10px;
+}
+.intro h1{
+  margin:0;
+  font:400 clamp(38px,7vw,68px) Georgia,serif;
+  line-height:1;
+}
+.intro p{
+  max-width:700px;
+  margin:14px auto 0;
+  color:#cabfd0;
+  line-height:1.58;
+}
+.forge-grid{
+  display:grid;
+  grid-template-columns:minmax(0,1.08fr) minmax(340px,.92fr);
+  gap:18px;
+  align-items:start;
+}
+.panel{
+  border:1px solid var(--line);
+  border-radius:22px;
+  background:
+    radial-gradient(circle at 80% 0,rgba(189,120,239,.09),transparent 32%),
+    linear-gradient(145deg,rgba(19,10,28,.96),rgba(8,4,12,.97));
+  box-shadow:0 26px 80px rgba(0,0,0,.42);
+  overflow:hidden;
+}
+.panel-head{
+  padding:18px 20px;
+  border-bottom:1px solid var(--line);
+}
+.panel-head h2{
+  margin:0;
+  font:400 24px Georgia,serif;
+}
+.panel-head p{
+  margin:6px 0 0;
+  color:var(--muted);
+  font-size:13px;
+}
+.panel-body{padding:18px}
+
+.step{display:none}
+.step.active{display:block;animation:stepIn .4s ease both}
+@keyframes stepIn{
+  from{opacity:0;transform:translateY(10px)}
+  to{opacity:1;transform:none}
+}
+
+.symbol-grid,.ring-grid,.accent-grid,.glow-grid{
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:10px;
+}
+.choice{
+  position:relative;
+  min-height:104px;
+  border:1px solid var(--line);
+  border-radius:14px;
+  background:rgba(255,255,255,.025);
+  display:grid;
+  place-items:center;
+  gap:7px;
+  padding:12px 8px;
+  cursor:pointer;
+  text-align:center;
+  transition:.2s;
+}
+.choice:hover,.choice:focus-visible{
+  border-color:rgba(201,137,239,.52);
+  background:rgba(189,120,239,.07);
+  transform:translateY(-2px);
+}
+.choice.selected{
+  border-color:#c47ff0;
+  background:rgba(189,120,239,.14);
+  box-shadow:0 0 20px rgba(189,120,239,.18);
+}
+.choice .symbol{
+  font-size:31px;
+  line-height:1;
+}
+.choice .label{
+  font:13px Georgia,serif;
+}
+.choice .sub{
+  color:var(--muted);
+  font-size:10px;
+}
+.choice .check{
+  position:absolute;right:8px;top:8px;
+  width:20px;height:20px;border-radius:50%;
+  display:grid;place-items:center;
+  border:1px solid var(--line);
+  color:transparent;
+  font-size:12px;
+}
+.choice.selected .check{
+  color:#fff;
+  background:#6d3592;
+  border-color:#c47ff0;
+}
+
+.canvas-wrap{
+  position:relative;
+  height:420px;
+  border:1px solid var(--line);
+  border-radius:18px;
+  overflow:hidden;
+  background:
+    radial-gradient(circle at 50% 50%,rgba(126,61,168,.12),transparent 38%),
+    repeating-radial-gradient(circle at 50% 50%,transparent 0 39px,rgba(235,225,241,.035) 40px 41px),
+    #08040d;
+}
+#sigilCanvas{
+  width:100%;
+  height:100%;
+  display:block;
+  touch-action:none;
+  cursor:crosshair;
+}
+.canvas-tools{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+  margin-top:10px;
+}
+.tool{
+  padding:9px 11px;
+  border:1px solid var(--line);
+  border-radius:10px;
+  background:rgba(255,255,255,.03);
+  cursor:pointer;
+}
+.tool.active{
+  border-color:#c47ff0;
+  background:rgba(189,120,239,.13);
+}
+.range{
+  display:grid;
+  gap:6px;
+  margin-top:12px;
+}
+.range label{font-size:12px;color:#d5c9db}
+.range input{width:100%}
+
+.field{display:grid;gap:6px;margin-top:14px}
+.field label{
+  color:#d8ccde;
+  font-size:12px;
+}
+.field input,.field textarea{
+  width:100%;
+  border:1px solid var(--line);
+  border-radius:11px;
+  background:rgba(0,0,0,.24);
+  color:#fff;
+  padding:11px 12px;
+}
+.field textarea{min-height:120px;resize:vertical}
+
+.preview-panel{
+  position:sticky;
+  top:92px;
+}
+.preview-stage{
+  min-height:610px;
+  display:grid;
+  place-items:center;
+  padding:24px;
+  position:relative;
+  overflow:hidden;
+  background:
+    radial-gradient(circle at 50% 20%,rgba(126,61,168,.18),transparent 28%),
+    linear-gradient(180deg,#09050f,#050208);
+}
+.preview-stage::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  opacity:.5;
+  background-image:
+    radial-gradient(circle at 16% 12%,rgba(255,255,255,.8) 0 1px,transparent 1.6px),
+    radial-gradient(circle at 72% 18%,rgba(201,139,239,.8) 0 1px,transparent 1.6px),
+    radial-gradient(circle at 84% 52%,rgba(255,255,255,.7) 0 1px,transparent 1.6px),
+    radial-gradient(circle at 28% 72%,rgba(202,141,239,.78) 0 1px,transparent 1.6px);
+  background-size:180px 180px,230px 230px,260px 260px,210px 210px;
+}
+.torch{
+  position:relative;
+  z-index:2;
+  width:220px;
+  height:520px;
+  display:grid;
+  justify-items:center;
+}
+.flame{
+  position:relative;
+  width:130px;height:190px;
+  margin-bottom:-24px;
+  filter:drop-shadow(0 0 30px rgba(189,120,239,.55));
+}
+.flame::before,.flame::after{
+  content:"";
+  position:absolute;
+  left:50%;bottom:0;
+  transform-origin:50% 100%;
+  border-radius:48% 52% 40% 60% / 66% 58% 42% 34%;
+}
+.flame::before{
+  width:120px;height:180px;margin-left:-60px;
+  background:radial-gradient(circle at 50% 82%,#fff 0 4%,#ecd2ff 15%,#bd78ef 37%,#662789 60%,transparent 72%);
+  animation:flicker 1.35s ease-in-out infinite alternate;
+}
+.flame::after{
+  width:76px;height:130px;margin-left:-38px;
+  background:radial-gradient(circle at 50% 82%,#fff 0 5%,#e9c9ff 24%,#873bb4 57%,transparent 72%);
+  animation:flicker2 1.1s .1s ease-in-out infinite alternate;
+}
+.torch-head{
+  position:relative;
+  width:185px;height:104px;
+  border:2px solid rgba(222,213,227,.45);
+  border-radius:24px 24px 40px 40px;
+  background:
+    linear-gradient(90deg,#1a1220,#4b3453 20%,#171019 45%,#59405f 70%,#171019);
+  box-shadow:
+    inset 0 0 22px rgba(255,255,255,.08),
+    0 12px 25px rgba(0,0,0,.42);
+}
+.torch-head::before{
+  content:"";
+  position:absolute;
+  left:14px;right:14px;top:14px;
+  height:10px;
+  border-top:1px solid rgba(232,222,236,.4);
+  border-bottom:1px solid rgba(232,222,236,.18);
+}
+.torch-handle{
+  position:relative;
+  width:82px;height:280px;
+  margin-top:-4px;
+  border:2px solid rgba(222,213,227,.34);
+  border-radius:16px 16px 28px 28px;
+  background:
+    repeating-linear-gradient(135deg,rgba(255,255,255,.08) 0 8px,rgba(0,0,0,.12) 9px 17px),
+    linear-gradient(90deg,#18101b,#4c3353 30%,#171019 56%,#5a3e62 78%,#19111c);
+  box-shadow:
+    inset 0 0 22px rgba(255,255,255,.05),
+    0 18px 35px rgba(0,0,0,.5);
+}
+.torch-handle::after{
+  content:"";
+  position:absolute;
+  left:50%;bottom:-25px;
+  width:108px;height:54px;
+  transform:translateX(-50%);
+  border:2px solid rgba(222,213,227,.3);
+  border-radius:0 0 34px 34px;
+  background:linear-gradient(90deg,#18101b,#4c3353,#18101b);
+}
+.sigil-medallion{
+  position:absolute;
+  left:50%;top:52px;
+  width:108px;height:108px;
+  transform:translateX(-50%);
+  border-radius:50%;
+  border:1px solid rgba(227,213,233,.45);
+  background:
+    radial-gradient(circle,rgba(189,120,239,.13),rgba(9,5,13,.95) 68%);
+  box-shadow:
+    0 0 18px rgba(189,120,239,.25),
+    inset 0 0 20px rgba(189,120,239,.09);
+  display:grid;
+  place-items:center;
+  overflow:hidden;
+}
+#previewCanvas{
+  width:100%;height:100%;
+  display:block;
+}
+.preview-meaning{
+  position:relative;
+  z-index:2;
+  width:min(390px,90%);
+  margin-top:18px;
+  padding:14px 16px;
+  border:1px solid var(--line);
+  border-radius:13px;
+  background:rgba(10,6,15,.74);
+  text-align:center;
+}
+.preview-meaning strong{
+  display:block;
+  font:18px Georgia,serif;
+}
+.preview-meaning span{
+  display:block;
+  color:var(--muted);
+  margin-top:5px;
+  font-size:12px;
+  line-height:1.45;
+}
+
+.forge-footer{
+  position:fixed;
+  left:0;right:0;bottom:0;
+  z-index:25;
+  padding:12px max(18px,env(safe-area-inset-right)) max(12px,env(safe-area-inset-bottom)) max(18px,env(safe-area-inset-left));
+  border-top:1px solid var(--line);
+  background:rgba(5,2,8,.88);
+  backdrop-filter:blur(18px);
+}
+.footer-inner{
+  width:min(1180px,100%);
+  margin:auto;
+  display:flex;
+  justify-content:space-between;
+  gap:12px;
+}
+.nav-btn{
+  min-width:140px;
+  padding:13px 18px;
+  border:1px solid var(--line);
+  border-radius:12px;
+  background:rgba(255,255,255,.035);
+  cursor:pointer;
+}
+.nav-btn.primary{
+  border-color:#c47ff0;
+  background:linear-gradient(180deg,#8e43ba,#53256f);
+  box-shadow:0 0 24px rgba(189,120,239,.24);
+}
+.nav-btn[disabled]{opacity:.35;cursor:not-allowed}
+
+.forge-complete{
+  position:fixed;
+  inset:0;
+  z-index:200;
+  display:none;
+  place-items:center;
+  padding:18px;
+  background:
+    radial-gradient(circle at 50% 60%,rgba(118,40,151,.38),transparent 30%),
+    rgba(3,1,6,.94);
+  backdrop-filter:blur(14px);
+}
+.forge-complete.open{display:grid}
+.complete-card{
+  width:min(540px,100%);
+  text-align:center;
+  padding:28px 24px;
+  border:1px solid rgba(221,187,241,.32);
+  border-radius:24px;
+  background:linear-gradient(145deg,#1a0e25,#08040d);
+  box-shadow:0 35px 110px rgba(0,0,0,.65);
+}
+.complete-sigil{
+  width:150px;height:150px;
+  margin:0 auto 18px;
+  border-radius:50%;
+  border:1px solid rgba(232,220,238,.42);
+  background:radial-gradient(circle,rgba(189,120,239,.12),#08040d 68%);
+  box-shadow:0 0 40px rgba(189,120,239,.32);
+  overflow:hidden;
+}
+#completeCanvas{width:100%;height:100%}
+.complete-card h2{
+  margin:0;
+  font:400 38px Georgia,serif;
+}
+.complete-card p{
+  color:#cbbfd1;
+  line-height:1.6;
+}
+.complete-card .belief{
+  color:#e0c1f0;
+  font:italic 17px Georgia,serif;
+}
+.complete-card .primary{
+  width:100%;
+  margin-top:12px;
+}
+
+@keyframes flicker{
+  to{transform:translateX(4px) rotate(2deg) scaleY(1.06)}
+}
+@keyframes flicker2{
+  to{transform:translateX(-3px) rotate(-3deg) scaleY(.95)}
+}
+
+@media(max-width:900px){
+  .forge-grid{grid-template-columns:1fr}
+  .preview-panel{position:relative;top:auto}
+  .preview-stage{min-height:520px}
+}
+@media(max-width:620px){
+  .forge-top{grid-template-columns:auto 1fr auto;padding-left:10px;padding-right:10px}
+  .progress-step{width:28px;height:28px}
+  .progress-line{width:15px}
+  .forge-main{padding:20px 12px 110px}
+  .symbol-grid,.ring-grid,.accent-grid,.glow-grid{grid-template-columns:repeat(2,1fr)}
+  .canvas-wrap{height:360px}
+  .footer-inner{gap:8px}
+  .nav-btn{min-width:0;flex:1}
+}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important}
+}
+</style>
+</head>
+<body>
+<div class="forge-shell">
+  <header class="forge-top">
+    <a class="back" href="index.html" aria-label="Return to portal">←</a>
+    <div class="forge-progress" aria-label="Forge progress">
+      <div class="progress-step active" data-progress="1">1</div>
+      <div class="progress-line"></div>
+      <div class="progress-step" data-progress="2">2</div>
+      <div class="progress-line"></div>
+      <div class="progress-step" data-progress="3">3</div>
+      <div class="progress-line"></div>
+      <div class="progress-step" data-progress="4">4</div>
+      <div class="progress-line"></div>
+      <div class="progress-step" data-progress="5">5</div>
+    </div>
+    <button class="help" id="helpBtn" type="button" aria-label="Forge help">?</button>
+  </header>
+
+  <main class="forge-main">
+    <section class="intro">
+      <p class="kicker">The Forge</p>
+      <h1>Forge Your Sigil</h1>
+      <p>
+        Your sigil is a private symbol of the light you carry.
+        Build it from meaning, shape it with your own hand, and let it become part of your Torch.
+      </p>
+    </section>
+
+    <div class="forge-grid">
+      <section class="panel">
+        <div class="panel-head">
+          <h2 id="stepTitle">Choose the heart of your sigil</h2>
+          <p id="stepDescription">Begin with the symbol that feels closest to your path.</p>
+        </div>
+        <div class="panel-body">
+
+          <div class="step active" data-step="1">
+            <div class="symbol-grid">
+              <button class="choice selected" data-type="center" data-value="moon" type="button">
+                <span class="check">✓</span><span class="symbol">☾</span><span class="label">Moon</span><span class="sub">Intuition & cycles</span>
+              </button>
+              <button class="choice" data-type="center" data-value="flame" type="button">
+                <span class="check">✓</span><span class="symbol">🔥</span><span class="label">Flame</span><span class="sub">Courage & guidance</span>
+              </button>
+              <button class="choice" data-type="center" data-value="compass" type="button">
+                <span class="check">✓</span><span class="symbol">✦</span><span class="label">Compass</span><span class="sub">Direction & discovery</span>
+              </button>
+              <button class="choice" data-type="center" data-value="eye" type="button">
+                <span class="check">✓</span><span class="symbol">◉</span><span class="label">Eye</span><span class="sub">Awareness & truth</span>
+              </button>
+              <button class="choice" data-type="center" data-value="tree" type="button">
+                <span class="check">✓</span><span class="symbol">♧</span><span class="label">Tree</span><span class="sub">Roots & growth</span>
+              </button>
+              <button class="choice" data-type="center" data-value="key" type="button">
+                <span class="check">✓</span><span class="symbol">🗝</span><span class="label">Key</span><span class="sub">Thresholds & wisdom</span>
+              </button>
+              <button class="choice" data-type="center" data-value="mountain" type="button">
+                <span class="check">✓</span><span class="symbol">△</span><span class="label">Mountain</span><span class="sub">Endurance & ascent</span>
+              </button>
+              <button class="choice" data-type="center" data-value="star" type="button">
+                <span class="check">✓</span><span class="symbol">✧</span><span class="label">Star</span><span class="sub">Hope & possibility</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="step" data-step="2">
+            <div class="ring-grid">
+              <button class="choice selected" data-type="ring" data-value="circle" type="button">
+                <span class="check">✓</span><span class="symbol">◯</span><span class="label">Circle</span><span class="sub">Wholeness</span>
+              </button>
+              <button class="choice" data-type="ring" data-value="knot" type="button">
+                <span class="check">✓</span><span class="symbol">⌘</span><span class="label">Knot</span><span class="sub">Connection</span>
+              </button>
+              <button class="choice" data-type="ring" data-value="branches" type="button">
+                <span class="check">✓</span><span class="symbol">❧</span><span class="label">Branches</span><span class="sub">Becoming</span>
+              </button>
+              <button class="choice" data-type="ring" data-value="geometry" type="button">
+                <span class="check">✓</span><span class="symbol">✺</span><span class="label">Geometry</span><span class="sub">Order & balance</span>
+              </button>
+            </div>
+
+            <div class="field">
+              <label for="sigilName">Name your sigil</label>
+              <input id="sigilName" maxlength="60" placeholder="Example: The Steady Flame">
+            </div>
+            <div class="field">
+              <label for="sigilMeaning">What does it mean to you? <span style="color:#9c90a3">(private)</span></label>
+              <textarea id="sigilMeaning" maxlength="500" placeholder="Write the meaning you want to remember."></textarea>
+            </div>
+          </div>
+
+          <div class="step" data-step="3">
+            <div class="canvas-wrap">
+              <canvas id="sigilCanvas" width="900" height="900" aria-label="Draw your personal additions to the sigil"></canvas>
+            </div>
+            <div class="canvas-tools">
+              <button class="tool active" data-tool="draw" type="button">Draw</button>
+              <button class="tool" data-tool="erase" type="button">Erase</button>
+              <button class="tool" id="undoBtn" type="button">Undo</button>
+              <button class="tool" id="clearBtn" type="button">Clear</button>
+            </div>
+            <div class="range">
+              <label for="brushSize">Line weight</label>
+              <input id="brushSize" type="range" min="2" max="18" value="7">
+            </div>
+          </div>
+
+          <div class="step" data-step="4">
+            <div class="accent-grid">
+              <button class="choice selected" data-type="accent" data-value="stars" type="button">
+                <span class="check">✓</span><span class="symbol">✦</span><span class="label">Stars</span><span class="sub">Guidance</span>
+              </button>
+              <button class="choice" data-type="accent" data-value="vines" type="button">
+                <span class="check">✓</span><span class="symbol">❦</span><span class="label">Vines</span><span class="sub">Growth</span>
+              </button>
+              <button class="choice" data-type="accent" data-value="threads" type="button">
+                <span class="check">✓</span><span class="symbol">∞</span><span class="label">Threads</span><span class="sub">Connection</span>
+              </button>
+              <button class="choice" data-type="accent" data-value="embers" type="button">
+                <span class="check">✓</span><span class="symbol">·</span><span class="label">Embers</span><span class="sub">Light shared</span>
+              </button>
+            </div>
+
+            <div class="glow-grid" style="margin-top:14px">
+              <button class="choice selected" data-type="glow" data-value="violet" type="button">
+                <span class="check">✓</span><span class="symbol" style="color:#c47ff0">●</span><span class="label">Violet</span><span class="sub">Mystery</span>
+              </button>
+              <button class="choice" data-type="glow" data-value="silver" type="button">
+                <span class="check">✓</span><span class="symbol" style="color:#eee7f1">●</span><span class="label">Silver</span><span class="sub">Clarity</span>
+              </button>
+              <button class="choice" data-type="glow" data-value="gold" type="button">
+                <span class="check">✓</span><span class="symbol" style="color:#e3b96e">●</span><span class="label">Gold</span><span class="sub">Warmth</span>
+              </button>
+              <button class="choice" data-type="glow" data-value="blue" type="button">
+                <span class="check">✓</span><span class="symbol" style="color:#8bbcf1">●</span><span class="label">Moon Blue</span><span class="sub">Stillness</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="step" data-step="5">
+            <div style="text-align:center;padding:10px 4px">
+              <p class="kicker">Your First Torch</p>
+              <h2 style="font:400 34px Georgia,serif;margin:0">Your sigil is ready to be forged.</h2>
+              <p style="color:var(--muted);line-height:1.6">
+                The symbol you created will be saved privately on this device for the demo.
+                It will appear on your Torch and can be changed later inside The Forge.
+              </p>
+              <div class="notice" style="margin-top:16px;padding:14px;border-left:3px solid #bd78ef;background:rgba(189,120,239,.08);text-align:left">
+                <strong>No light is diminished by lighting another.</strong><br>
+                Your Torch begins as your own. Its purpose is to help you carry light—and pass it on.
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <aside class="panel preview-panel">
+        <div class="panel-head">
+          <h2>Your Torch</h2>
+          <p>Every choice changes the sigil carved into it.</p>
+        </div>
+        <div class="preview-stage">
+          <div class="torch" aria-label="Preview of your personal torch">
+            <div class="flame"></div>
+            <div class="torch-head"></div>
+            <div class="torch-handle">
+              <div class="sigil-medallion"><canvas id="previewCanvas" width="500" height="500"></canvas></div>
+            </div>
+          </div>
+          <div class="preview-meaning">
+            <strong id="previewName">Unnamed Sigil</strong>
+            <span id="previewMeaning">A private symbol of the light you carry.</span>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <footer class="forge-footer">
+    <div class="footer-inner">
+      <button class="nav-btn" id="previousBtn" type="button" disabled>Previous</button>
+      <button class="nav-btn primary" id="nextBtn" type="button">Continue</button>
+    </div>
+  </footer>
+</div>
+
+<div class="forge-complete" id="forgeComplete" aria-hidden="true">
+  <section class="complete-card">
+    <div class="complete-sigil"><canvas id="completeCanvas" width="500" height="500"></canvas></div>
+    <p class="kicker">A New Torch Has Been Lit</p>
+    <h2>Your light is now part of the Circle.</h2>
+    <p id="completeMeaning">Your sigil has been forged and placed upon your Torch.</p>
+    <p class="belief">No light is diminished by lighting another.</p>
+    <button class="nav-btn primary" id="enterCircleBtn" type="button">Enter the Circle</button>
+  </section>
+</div>
+
+<div class="modal" id="helpModal" style="position:fixed;inset:0;z-index:180;display:none;place-items:center;padding:18px;background:rgba(2,1,5,.82);backdrop-filter:blur(12px)">
+  <section class="panel" style="width:min(520px,100%);padding:22px">
+    <h2 style="font:400 28px Georgia,serif;margin:0 0 10px">About The Forge</h2>
+    <p style="color:var(--muted);line-height:1.6">
+      Your sigil is personal. It can represent your values, your path, or simply the light you want to remember.
+      Nothing here has to follow a traditional system.
+    </p>
+    <p style="color:var(--muted);line-height:1.6">
+      For this demo, your sigil is stored only in this browser. It is not uploaded or shared.
+    </p>
+    <button class="nav-btn primary" id="closeHelp" type="button" style="width:100%">Return to The Forge</button>
+  </section>
+</div>
+
+<script>
+(() => {
+  const state = {
+    step: 1,
+    center: 'moon',
+    ring: 'circle',
+    accent: 'stars',
+    glow: 'violet',
+    name: '',
+    meaning: '',
+    drawing: null
+  };
+
+  const colors = {
+    violet: '#c47ff0',
+    silver: '#ece7ef',
+    gold: '#e4b96f',
+    blue: '#8fbff0'
+  };
+
+  const titleMap = {
+    1: ['Choose the heart of your sigil','Begin with the symbol that feels closest to your path.'],
+    2: ['Give it form and meaning','Choose the structure around it, then write what it means to you.'],
+    3: ['Add your own hand','Draw freely. The lines you make become part of the sigil.'],
+    4: ['Choose its living light','Add an accent and choose the glow carried into your Torch.'],
+    5: ['Light your first Torch','Review the symbol you have forged before entering the Circle.']
+  };
+
+  const canvas = document.getElementById('sigilCanvas');
+  const ctx = canvas.getContext('2d');
+  const previewCanvas = document.getElementById('previewCanvas');
+  const previewCtx = previewCanvas.getContext('2d');
+  const completeCanvas = document.getElementById('completeCanvas');
+  const completeCtx = completeCanvas.getContext('2d');
+
+  let tool = 'draw';
+  let drawing = false;
+  let history = [];
+
+  function glowColor(){ return colors[state.glow] || colors.violet; }
+
+  function drawBase(targetCtx, size, includeDrawing = true) {
+    const c = size / 2;
+    const g = glowColor();
+
+    targetCtx.clearRect(0,0,size,size);
+    targetCtx.save();
+    targetCtx.translate(c,c);
+    targetCtx.strokeStyle = g;
+    targetCtx.fillStyle = g;
+    targetCtx.lineWidth = Math.max(4,size*.012);
+    targetCtx.shadowColor = g;
+    targetCtx.shadowBlur = size*.06;
+    targetCtx.globalAlpha = .94;
+
+    // outer ring
+    if(state.ring === 'circle'){
+      targetCtx.beginPath(); targetCtx.arc(0,0,size*.34,0,Math.PI*2); targetCtx.stroke();
+      targetCtx.beginPath(); targetCtx.arc(0,0,size*.28,0,Math.PI*2); targetCtx.globalAlpha=.45; targetCtx.stroke(); targetCtx.globalAlpha=.94;
+    }
+    if(state.ring === 'knot'){
+      for(let i=0;i<4;i++){
+        targetCtx.rotate(Math.PI/2);
+        targetCtx.beginPath();
+        targetCtx.ellipse(size*.13,0,size*.19,size*.09,Math.PI/4,0,Math.PI*2);
+        targetCtx.stroke();
+      }
+    }
+    if(state.ring === 'branches'){
+      for(let side of [-1,1]){
+        targetCtx.beginPath();
+        targetCtx.moveTo(side*size*.32,size*.24);
+        targetCtx.quadraticCurveTo(side*size*.38,0,side*size*.25,-size*.25);
+        targetCtx.stroke();
+        for(let i=-2;i<=2;i++){
+          const y=i*size*.08;
+          targetCtx.beginPath();
+          targetCtx.moveTo(side*(size*.29-Math.abs(i)*4),y);
+          targetCtx.lineTo(side*(size*.39-Math.abs(i)*2),y-size*.045);
+          targetCtx.stroke();
+        }
+      }
+    }
+    if(state.ring === 'geometry'){
+      targetCtx.beginPath();
+      for(let i=0;i<8;i++){
+        const a=-Math.PI/2+i*Math.PI/4;
+        const x=Math.cos(a)*size*.34,y=Math.sin(a)*size*.34;
+        i?targetCtx.lineTo(x,y):targetCtx.moveTo(x,y);
+      }
+      targetCtx.closePath();targetCtx.stroke();
+      targetCtx.beginPath();
+      for(let i=0;i<4;i++){
+        const a=-Math.PI/2+i*Math.PI/2;
+        const x=Math.cos(a)*size*.24,y=Math.sin(a)*size*.24;
+        i?targetCtx.lineTo(x,y):targetCtx.moveTo(x,y);
+      }
+      targetCtx.closePath();targetCtx.stroke();
+    }
+
+    // center symbol
+    targetCtx.globalAlpha = 1;
+    if(state.center === 'moon'){
+      targetCtx.beginPath(); targetCtx.arc(-size*.035,0,size*.12,-Math.PI/2,Math.PI/2); targetCtx.arc(size*.045,0,size*.105,Math.PI/2,-Math.PI/2,true); targetCtx.closePath(); targetCtx.fill();
+    }
+    if(state.center === 'flame'){
+      targetCtx.beginPath();
+      targetCtx.moveTo(0,size*.15);
+      targetCtx.bezierCurveTo(-size*.16,size*.04,-size*.08,-size*.12,0,-size*.20);
+      targetCtx.bezierCurveTo(size*.02,-size*.08,size*.15,-size*.03,size*.10,size*.10);
+      targetCtx.bezierCurveTo(size*.07,size*.16,size*.02,size*.18,0,size*.15);
+      targetCtx.fill();
+    }
+    if(state.center === 'compass'){
+      for(let i=0;i<8;i++){
+        targetCtx.save();targetCtx.rotate(i*Math.PI/4);
+        targetCtx.beginPath();targetCtx.moveTo(0,-size*.21);targetCtx.lineTo(size*.035,-size*.03);targetCtx.lineTo(0,0);targetCtx.lineTo(-size*.035,-size*.03);targetCtx.closePath();
+        i%2===0?targetCtx.fill():targetCtx.stroke();targetCtx.restore();
+      }
+      targetCtx.beginPath();targetCtx.arc(0,0,size*.04,0,Math.PI*2);targetCtx.fill();
+    }
+    if(state.center === 'eye'){
+      targetCtx.beginPath();targetCtx.moveTo(-size*.18,0);targetCtx.quadraticCurveTo(0,-size*.13,size*.18,0);targetCtx.quadraticCurveTo(0,size*.13,-size*.18,0);targetCtx.stroke();
+      targetCtx.beginPath();targetCtx.arc(0,0,size*.055,0,Math.PI*2);targetCtx.fill();
+    }
+    if(state.center === 'tree'){
+      targetCtx.beginPath();targetCtx.moveTo(0,size*.17);targetCtx.lineTo(0,-size*.08);targetCtx.stroke();
+      for(let i=0;i<5;i++){
+        const y=-size*.02-i*size*.035;
+        targetCtx.beginPath();targetCtx.moveTo(0,y);targetCtx.lineTo(-size*(.07+i*.014),y-size*.07);targetCtx.moveTo(0,y);targetCtx.lineTo(size*(.07+i*.014),y-size*.07);targetCtx.stroke();
+      }
+      targetCtx.beginPath();targetCtx.moveTo(0,size*.14);targetCtx.lineTo(-size*.10,size*.22);targetCtx.moveTo(0,size*.14);targetCtx.lineTo(size*.10,size*.22);targetCtx.stroke();
+    }
+    if(state.center === 'key'){
+      targetCtx.beginPath();targetCtx.arc(0,-size*.08,size*.07,0,Math.PI*2);targetCtx.stroke();
+      targetCtx.beginPath();targetCtx.moveTo(0,-size*.01);targetCtx.lineTo(0,size*.18);targetCtx.lineTo(size*.075,size*.18);targetCtx.moveTo(0,size*.11);targetCtx.lineTo(-size*.06,size*.11);targetCtx.stroke();
+    }
+    if(state.center === 'mountain'){
+      targetCtx.beginPath();targetCtx.moveTo(-size*.19,size*.13);targetCtx.lineTo(0,-size*.18);targetCtx.lineTo(size*.19,size*.13);targetCtx.stroke();
+      targetCtx.beginPath();targetCtx.moveTo(-size*.08,-size*.04);targetCtx.lineTo(0,-size*.18);targetCtx.lineTo(size*.06,-size*.07);targetCtx.stroke();
+    }
+    if(state.center === 'star'){
+      targetCtx.beginPath();
+      for(let i=0;i<10;i++){
+        const a=-Math.PI/2+i*Math.PI/5;
+        const r=i%2===0?size*.19:size*.07;
+        const x=Math.cos(a)*r,y=Math.sin(a)*r;
+        i?targetCtx.lineTo(x,y):targetCtx.moveTo(x,y);
+      }
+      targetCtx.closePath();targetCtx.fill();
+    }
+
+    // accents
+    targetCtx.lineWidth=Math.max(2,size*.006);
+    if(state.accent === 'stars'){
+      [[-.25,-.18],[.25,-.15],[-.23,.20],[.23,.19]].forEach(([x,y])=>{
+        targetCtx.beginPath();targetCtx.moveTo(x*size,(y-.035)*size);targetCtx.lineTo(x*size,(y+.035)*size);targetCtx.moveTo((x-.035)*size,y*size);targetCtx.lineTo((x+.035)*size,y*size);targetCtx.stroke();
+      });
+    }
+    if(state.accent === 'vines'){
+      targetCtx.beginPath();targetCtx.arc(0,0,size*.39,.2,1.2);targetCtx.stroke();
+      targetCtx.beginPath();targetCtx.arc(0,0,size*.39,Math.PI+.2,Math.PI+1.2);targetCtx.stroke();
+    }
+    if(state.accent === 'threads'){
+      for(let i=-1;i<=1;i++){
+        targetCtx.beginPath();
+        targetCtx.moveTo(-size*.36,i*size*.04);
+        targetCtx.bezierCurveTo(-size*.12,-size*.16+i*size*.03,size*.12,size*.16+i*size*.03,size*.36,i*size*.04);
+        targetCtx.stroke();
+      }
+    }
+    if(state.accent === 'embers'){
+      [[-.28,-.20],[.29,-.14],[-.22,.26],[.24,.22],[0,-.32]].forEach(([x,y],idx)=>{
+        targetCtx.beginPath();targetCtx.arc(x*size,y*size,size*(.012+idx*.002),0,Math.PI*2);targetCtx.fill();
+      });
+    }
+
+    targetCtx.restore();
+
+    if(includeDrawing && state.drawing){
+      const img=new Image();
+      img.onload=()=>targetCtx.drawImage(img,0,0,size,size);
+      img.src=state.drawing;
+    }
+  }
+
+  function updatePreview(){
+    drawBase(previewCtx,500,true);
+    document.getElementById('previewName').textContent = state.name || 'Unnamed Sigil';
+    document.getElementById('previewMeaning').textContent = state.meaning || 'A private symbol of the light you carry.';
+  }
+
+  function renderStep(){
+    document.querySelectorAll('.step').forEach(s=>s.classList.toggle('active',Number(s.dataset.step)===state.step));
+    document.querySelectorAll('.progress-step').forEach((p,i)=>{
+      const n=i+1;
+      p.classList.toggle('active',n===state.step);
+      p.classList.toggle('done',n<state.step);
+      p.textContent=n<state.step?'✓':n;
+    });
+    document.querySelectorAll('.progress-line').forEach((l,i)=>l.classList.toggle('done',i+1<state.step));
+    document.getElementById('stepTitle').textContent=titleMap[state.step][0];
+    document.getElementById('stepDescription').textContent=titleMap[state.step][1];
+    document.getElementById('previousBtn').disabled=state.step===1;
+    document.getElementById('nextBtn').textContent=state.step===5?'Light My First Torch':'Continue';
+    window.scrollTo({top:0,behavior:'smooth'});
+  }
+
+  document.querySelectorAll('.choice').forEach(choice=>{
+    choice.addEventListener('click',()=>{
+      const type=choice.dataset.type;
+      state[type]=choice.dataset.value;
+      document.querySelectorAll(`.choice[data-type="${type}"]`).forEach(c=>c.classList.toggle('selected',c===choice));
+      updatePreview();
+    });
+  });
+
+  document.getElementById('sigilName').addEventListener('input',e=>{state.name=e.target.value.trim();updatePreview()});
+  document.getElementById('sigilMeaning').addEventListener('input',e=>{state.meaning=e.target.value.trim();updatePreview()});
+
+  document.getElementById('nextBtn').addEventListener('click',()=>{
+    if(state.step<5){state.step++;renderStep();return;}
+    finishForge();
+  });
+  document.getElementById('previousBtn').addEventListener('click',()=>{if(state.step>1){state.step--;renderStep();}});
+
+  // drawing canvas
+  function canvasPoint(e){
+    const r=canvas.getBoundingClientRect();
+    const t=e.touches?e.touches[0]:e;
+    return {x:(t.clientX-r.left)*(canvas.width/r.width),y:(t.clientY-r.top)*(canvas.height/r.height)};
+  }
+  function saveHistory(){
+    history.push(canvas.toDataURL());
+    if(history.length>20)history.shift();
+  }
+  function startDraw(e){
+    e.preventDefault();
+    saveHistory();
+    drawing=true;
+    const p=canvasPoint(e);
+    ctx.beginPath();ctx.moveTo(p.x,p.y);
+  }
+  function moveDraw(e){
+    if(!drawing)return;
+    e.preventDefault();
+    const p=canvasPoint(e);
+    ctx.lineCap='round';ctx.lineJoin='round';
+    ctx.lineWidth=Number(document.getElementById('brushSize').value);
+    if(tool==='erase'){
+      ctx.globalCompositeOperation='destination-out';
+      ctx.strokeStyle='rgba(0,0,0,1)';
+    }else{
+      ctx.globalCompositeOperation='source-over';
+      ctx.strokeStyle=glowColor();
+      ctx.shadowColor=glowColor();
+      ctx.shadowBlur=14;
+    }
+    ctx.lineTo(p.x,p.y);ctx.stroke();
+    state.drawing=canvas.toDataURL();
+    updatePreview();
+  }
+  function endDraw(){
+    drawing=false;
+    ctx.globalCompositeOperation='source-over';
+    ctx.shadowBlur=0;
+    state.drawing=canvas.toDataURL();
+    updatePreview();
+  }
+  canvas.addEventListener('pointerdown',startDraw);
+  canvas.addEventListener('pointermove',moveDraw);
+  window.addEventListener('pointerup',endDraw);
+
+  document.querySelectorAll('.tool[data-tool]').forEach(b=>b.addEventListener('click',()=>{
+    tool=b.dataset.tool;
+    document.querySelectorAll('.tool[data-tool]').forEach(x=>x.classList.toggle('active',x===b));
+  }));
+  document.getElementById('clearBtn').addEventListener('click',()=>{
+    saveHistory();ctx.clearRect(0,0,canvas.width,canvas.height);state.drawing=null;updatePreview();
+  });
+  document.getElementById('undoBtn').addEventListener('click',()=>{
+    const last=history.pop();
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    if(!last){state.drawing=null;updatePreview();return;}
+    const img=new Image();img.onload=()=>{ctx.drawImage(img,0,0);state.drawing=canvas.toDataURL();updatePreview()};img.src=last;
+  });
+
+  function finishForge(){
+    state.name=document.getElementById('sigilName').value.trim()||'The First Flame';
+    state.meaning=document.getElementById('sigilMeaning').value.trim()||'A symbol of the light I choose to carry.';
+    state.drawing=canvas.toDataURL();
+
+    localStorage.setItem('mahasaSigil',JSON.stringify(state));
+    localStorage.setItem('mahasaFirstTorchLit','true');
+
+    drawBase(completeCtx,500,true);
+    document.getElementById('completeMeaning').textContent=`${state.name} has been forged and placed upon your Torch.`;
+    document.getElementById('forgeComplete').classList.add('open');
+    document.getElementById('forgeComplete').setAttribute('aria-hidden','false');
+  }
+
+  document.getElementById('enterCircleBtn').addEventListener('click',()=>{
+    window.location.href='dashboard.html?firstTorch=1';
+  });
+
+  const help=document.getElementById('helpModal');
+  document.getElementById('helpBtn').addEventListener('click',()=>help.style.display='grid');
+  document.getElementById('closeHelp').addEventListener('click',()=>help.style.display='none');
+  help.addEventListener('click',e=>{if(e.target===help)help.style.display='none'});
+
+  const saved=localStorage.getItem('mahasaSigil');
+  if(saved){
+    try{
+      const parsed=JSON.parse(saved);
+      Object.assign(state,parsed,{step:1});
+      document.getElementById('sigilName').value=state.name||'';
+      document.getElementById('sigilMeaning').value=state.meaning||'';
+      document.querySelectorAll('.choice').forEach(c=>{
+        c.classList.toggle('selected',state[c.dataset.type]===c.dataset.value);
+      });
+      if(state.drawing){
+        const img=new Image();img.onload=()=>{ctx.drawImage(img,0,0);updatePreview()};img.src=state.drawing;
+      }
+    }catch(e){}
+  }
+
+  renderStep();
+  updatePreview();
+})();
+</script>
+</body>
+</html>

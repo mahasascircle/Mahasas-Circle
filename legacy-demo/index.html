@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#020105">
+<meta name="description" content="Mahasa's Circle — a safe space for every path. Carry the Torch. Light the Way.">
+<title>Mahasa's Circle</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body class="portal-page">
+
+<div class="first-flame" id="firstFlame" aria-hidden="true">
+  <div class="first-flame-stars" aria-hidden="true"></div>
+  <section class="first-flame-card" aria-labelledby="firstFlameTitle">
+    <div class="first-flame-symbol" aria-hidden="true">
+      <span class="first-flame-glow"></span>
+      <span class="first-flame-icon">🔥</span>
+    </div>
+    <p class="first-flame-kicker">Before you enter the Circle</p>
+    <h1 id="firstFlameTitle">Every soul carries a light.</h1>
+    <p class="first-flame-copy">
+      Some flames burn brightly. Some have nearly gone out.
+      Every flame matters.
+    </p>
+    <p class="first-flame-belief">No light is diminished by lighting another.</p>
+    <button class="first-flame-button" id="revealCircle" type="button">Reveal the Circle</button>
+    <button class="first-flame-skip" id="skipIntro" type="button">Skip introduction</button>
+  </section>
+</div>
+
+<main class="landing" id="landing">
+  <div class="portrait-stage" role="img" aria-label="Mahasa's Circle moonlit portal with a ceremonial torch">
+    <a class="hotspot join portal-link" href="join.html"
+       data-target="join.html"
+       data-title="Forge your sigil."
+       data-subtitle="Light your first torch."
+       aria-label="Join the Circle"></a>
+
+    <button class="hotspot enter transition-link"
+       data-target="dashboard.html"
+       data-title="Carry the torch."
+       data-subtitle="The Circle opens."
+       aria-label="Enter the Circle"></button>
+
+    <button class="hotspot member transition-link"
+       data-target="join.html"
+       data-title="Forge your sigil."
+       data-subtitle="Light your first torch."
+       aria-label="Become a Member"></button>
+
+    <button class="hotspot journey transition-link"
+       data-target="dashboard.html"
+       data-title="Begin your journey."
+       data-subtitle="The path opens."
+       aria-label="Begin Your Journey"></button>
+  </div>
+
+  <div class="portal-controls" aria-label="Portal controls">
+    <button class="portal-control" id="replayIntro" type="button" aria-label="Replay introduction">✦</button>
+    <button class="portal-control" id="motionToggle" type="button" aria-label="Reduce portal motion">≈</button>
+  </div>
+</main>
+
+<div class="flame-transition" id="flameTransition" aria-hidden="true">
+  <div class="portal-darken"></div>
+
+  <div class="ember-field" aria-hidden="true">
+    <i style="--x:7%;--s:.65;--d:.05s"></i>
+    <i style="--x:16%;--s:1;--d:.18s"></i>
+    <i style="--x:28%;--s:.8;--d:.32s"></i>
+    <i style="--x:39%;--s:1.2;--d:.11s"></i>
+    <i style="--x:51%;--s:.7;--d:.38s"></i>
+    <i style="--x:63%;--s:1.1;--d:.22s"></i>
+    <i style="--x:74%;--s:.9;--d:.44s"></i>
+    <i style="--x:86%;--s:1.25;--d:.27s"></i>
+    <i style="--x:94%;--s:.75;--d:.5s"></i>
+  </div>
+
+  <div class="fire-bed" aria-hidden="true">
+    <span class="flame f1"></span><span class="flame f2"></span>
+    <span class="flame f3"></span><span class="flame f4"></span>
+    <span class="flame f5"></span><span class="flame f6"></span>
+    <span class="flame f7"></span><span class="flame f8"></span>
+  </div>
+
+  <div class="heat-distortion" aria-hidden="true"></div>
+  <div class="fire-lens" aria-hidden="true"></div>
+
+  <div class="portal-copy">
+    <strong id="transitionTitle">Carry the torch.</strong>
+    <span id="transitionSubtitle">The Circle opens.</span>
+  </div>
+</div>
+
+<noscript>
+  <div class="noscript-notice">JavaScript is required for the animated portal. <a href="dashboard.html">Enter the Circle</a>.</div>
+</noscript>
+
+<script>
+(() => {
+  const firstFlame = document.getElementById('firstFlame');
+  const landing = document.getElementById('landing');
+  const revealButton = document.getElementById('revealCircle');
+  const skipButton = document.getElementById('skipIntro');
+  const replayButton = document.getElementById('replayIntro');
+  const motionButton = document.getElementById('motionToggle');
+  const transition = document.getElementById('flameTransition');
+  const transitionTitle = document.getElementById('transitionTitle');
+  const transitionSubtitle = document.getElementById('transitionSubtitle');
+
+  const query = new URLSearchParams(window.location.search);
+  const forceIntro = query.get('intro') === '1';
+  const hasSeenIntro = localStorage.getItem('mahasaFirstFlameSeen') === 'true';
+  let reducedMotion = localStorage.getItem('mahasaReducedMotion') === 'true';
+
+  function applyMotionPreference() {
+    document.documentElement.classList.toggle('manual-reduced-motion', reducedMotion);
+    motionButton.textContent = reducedMotion ? '▶' : '≈';
+    motionButton.setAttribute(
+      'aria-label',
+      reducedMotion ? 'Enable portal motion' : 'Reduce portal motion'
+    );
+  }
+
+  function showIntro() {
+    firstFlame.classList.add('open');
+    firstFlame.setAttribute('aria-hidden', 'false');
+    landing.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = 'hidden';
+    window.setTimeout(() => revealButton.focus(), 250);
+  }
+
+  function closeIntro(remember = true) {
+    firstFlame.classList.add('closing');
+    if (remember) localStorage.setItem('mahasaFirstFlameSeen', 'true');
+    window.setTimeout(() => {
+      firstFlame.classList.remove('open', 'closing');
+      firstFlame.setAttribute('aria-hidden', 'true');
+      landing.removeAttribute('aria-hidden');
+      document.body.style.overflow = '';
+      document.querySelector('.enter').focus({preventScroll:true});
+    }, reducedMotion ? 80 : 720);
+  }
+
+  function enterThroughFlame(button) {
+    const target = button.dataset.target;
+    transitionTitle.textContent = button.dataset.title || 'Carry the torch.';
+    transitionSubtitle.textContent = button.dataset.subtitle || 'The Circle opens.';
+    transition.classList.add('active');
+    transition.setAttribute('aria-hidden', 'false');
+
+    const delay = reducedMotion ? 420 : 2850;
+    window.setTimeout(() => {
+      window.location.href = target;
+    }, delay);
+  }
+
+  document.querySelectorAll('.transition-link').forEach(button => {
+    button.addEventListener('click', () => enterThroughFlame(button));
+  });
+
+  document.querySelectorAll('.portal-link').forEach(link => {
+    link.addEventListener('click', event => {
+      event.preventDefault();
+      enterThroughFlame(link);
+    });
+  });
+
+  revealButton.addEventListener('click', () => closeIntro(true));
+  skipButton.addEventListener('click', () => closeIntro(true));
+  replayButton.addEventListener('click', showIntro);
+
+  motionButton.addEventListener('click', () => {
+    reducedMotion = !reducedMotion;
+    localStorage.setItem('mahasaReducedMotion', String(reducedMotion));
+    applyMotionPreference();
+  });
+
+  firstFlame.addEventListener('click', event => {
+    if (event.target === firstFlame) closeIntro(true);
+  });
+
+  document.addEventListener('keydown', event => {
+    if (event.key === 'Escape' && firstFlame.classList.contains('open')) {
+      closeIntro(true);
+    }
+  });
+
+  applyMotionPreference();
+
+  if (forceIntro || !hasSeenIntro) {
+    window.setTimeout(showIntro, 180);
+  }
+})();
+</script>
+</body>
+</html>

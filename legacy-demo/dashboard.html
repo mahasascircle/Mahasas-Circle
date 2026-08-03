@@ -1,0 +1,418 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#030207">
+<title>Inside the Circle — Mahasa's Circle</title>
+<style>
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%;background:#030207}
+body{font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif}
+.dashboard-page{min-height:100svh;display:grid;place-items:start center;background:#030207;overflow-x:hidden}
+.dashboard-artboard{position:relative;width:min(100vw,1024px);aspect-ratio:1024/1536;background:url("assets/approved-dashboard.png") top center/contain no-repeat}
+.hotspot{position:absolute;display:block;border:0;padding:0;margin:0;border-radius:10px;background:transparent;color:inherit;appearance:none;-webkit-appearance:none}
+.hotspot:focus-visible{outline:3px solid white;outline-offset:3px;box-shadow:0 0 28px #b977ec}
+.portal{position:fixed;left:12px;top:max(12px,env(safe-area-inset-top));z-index:30;padding:9px 12px;border:1px solid rgba(235,225,241,.28);border-radius:999px;color:#fff;text-decoration:none;background:rgba(7,5,13,.78);backdrop-filter:blur(14px);font-size:11px}
+.top-home{left:19%;top:1%;width:6.2%;height:3.3%}.top-threads{left:25.7%;top:1%;width:10.5%;height:3.3%}.top-hearths{left:36.7%;top:1%;width:7.2%;height:3.3%}.top-local{left:44.5%;top:1%;width:5.8%;height:3.3%}.top-gatherings{left:50.9%;top:1%;width:9%;height:3.3%}.top-market{left:60.5%;top:1%;width:9.4%;height:3.3%}.top-library{left:70.5%;top:1%;width:6.4%;height:3.3%}
+.nav-home{left:1.4%;top:14.1%;width:15.8%;height:3.1%}.nav-threads{left:1.4%;top:17.3%;width:15.8%;height:3.1%}.nav-hearths{left:1.4%;top:20.5%;width:15.8%;height:3.1%}.nav-local{left:1.4%;top:23.7%;width:15.8%;height:3.1%}.nav-gatherings{left:1.4%;top:26.9%;width:15.8%;height:3.1%}.nav-market{left:1.4%;top:30.1%;width:15.8%;height:3.1%}.nav-library{left:1.4%;top:33.3%;width:15.8%;height:3.1%}.nav-profile{left:1.4%;top:37.5%;width:15.8%;height:3.1%}.nav-bookmarks{left:1.4%;top:40.7%;width:15.8%;height:3.1%}.nav-messages{left:1.4%;top:43.9%;width:15.8%;height:3.1%}.nav-settings{left:1.4%;top:47.1%;width:15.8%;height:3.1%}.nav-flame{left:1.4%;top:51.2%;width:15.8%;height:15.2%}
+.card-threads{left:19.4%;top:34%;width:13.1%;height:13.3%}.card-hearths{left:32.9%;top:34%;width:13.1%;height:13.3%}.card-local{left:46.4%;top:34%;width:13.1%;height:13.3%}.card-gatherings{left:59.9%;top:34%;width:13.1%;height:13.3%}.card-market{left:19.4%;top:48.4%;width:13.1%;height:13.3%}.card-library{left:32.9%;top:48.4%;width:13.1%;height:13.3%}.card-profile{left:46.4%;top:48.4%;width:13.1%;height:13.3%}.card-bookmarks{left:59.9%;top:48.4%;width:13.1%;height:13.3%}
+.upcoming{left:74%;top:6.5%;width:24.5%;height:19.4%}.local-map{left:74%;top:27.2%;width:24.5%;height:18.4%}.activity{left:74%;top:46.8%;width:24.5%;height:19.9%}
+.feature-moon{left:2.8%;top:68.3%;width:29%;height:14%}.feature-hecate{left:32.4%;top:68.3%;width:33%;height:14%}.feature-shop{left:66%;top:68.3%;width:31.5%;height:14%}
+@media(max-width:700px){.dashboard-artboard{width:100vw}.portal{padding:8px 10px}}
+
+/* MONDAY SPRINT — THE DASHBOARD AWAKENS */
+.dashboard-artboard{
+  opacity:0;
+  transform:scale(1.015);
+  filter:brightness(.22) saturate(.75);
+  animation:dashboardAwaken 1.5s cubic-bezier(.2,.72,.2,1) .12s forwards;
+}
+.dashboard-artboard::before{
+  content:"";
+  position:absolute;
+  left:3.2%;
+  top:4.8%;
+  width:13.5%;
+  height:12.5%;
+  border-radius:50%;
+  pointer-events:none;
+  opacity:0;
+  background:
+    radial-gradient(circle at 52% 70%,rgba(255,255,255,.95) 0 3%,rgba(216,168,247,.55) 13%,rgba(154,73,208,.26) 34%,transparent 68%);
+  filter:blur(2px);
+  animation:torchWake 2.5s ease-in-out .9s infinite alternate, torchAppear .7s .6s forwards;
+}
+.dashboard-artboard::after{
+  content:"";
+  position:absolute;
+  left:56%;
+  top:7.5%;
+  width:14%;
+  aspect-ratio:1;
+  border-radius:50%;
+  pointer-events:none;
+  opacity:0;
+  background:radial-gradient(circle,rgba(242,238,247,.24),rgba(196,177,213,.10) 43%,transparent 72%);
+  filter:blur(3px);
+  animation:moonBreathe 4.8s ease-in-out 1.1s infinite, moonAppear .8s .8s forwards;
+}
+.arrival-veil{
+  position:fixed;
+  inset:0;
+  z-index:25;
+  pointer-events:none;
+  background:#040208;
+  animation:veilLift 1.35s ease .2s forwards;
+}
+.greeting-chip{
+  position:fixed;
+  right:12px;
+  top:max(12px,env(safe-area-inset-top));
+  z-index:31;
+  padding:8px 11px;
+  border:1px solid rgba(235,225,241,.24);
+  border-radius:999px;
+  color:#e6dbea;
+  background:rgba(7,5,13,.76);
+  backdrop-filter:blur(14px);
+  font-size:11px;
+  opacity:0;
+  transform:translateY(-8px);
+  animation:chipIn .6s 1.05s forwards;
+}
+.moon-modal{
+  position:fixed;
+  inset:0;
+  z-index:100;
+  display:none;
+  place-items:center;
+  padding:18px;
+  background:rgba(2,1,5,.78);
+  backdrop-filter:blur(14px);
+}
+.moon-modal.open{display:grid}
+.moon-card{
+  width:min(460px,100%);
+  border:1px solid rgba(217,184,238,.34);
+  border-radius:22px;
+  padding:24px;
+  color:#f2edf5;
+  background:
+    radial-gradient(circle at 80% 0,rgba(180,112,224,.18),transparent 36%),
+    linear-gradient(145deg,#191022,#0a0710);
+  box-shadow:0 30px 90px rgba(0,0,0,.68);
+}
+.moon-orb{
+  width:112px;
+  height:112px;
+  margin:4px auto 18px;
+  border-radius:50%;
+  background:radial-gradient(circle at 35% 32%,#fff 0 7%,#cfc9d3 25%,#77707d 54%,#29232e 82%);
+  box-shadow:0 0 36px rgba(215,197,227,.24);
+}
+.moon-card h2{
+  margin:0;
+  text-align:center;
+  font:400 30px Georgia,serif;
+}
+.moon-card .illumination{
+  text-align:center;
+  color:#c993ec;
+  margin:7px 0 16px;
+  font-size:13px;
+  letter-spacing:.08em;
+}
+.moon-card p{
+  margin:0;
+  color:#c9becf;
+  line-height:1.65;
+  font-size:14px;
+}
+.moon-card .countdown{
+  margin-top:15px;
+  padding:12px;
+  border:1px solid rgba(235,225,241,.14);
+  border-radius:12px;
+  background:rgba(255,255,255,.035);
+  color:#ded3e4;
+  text-align:center;
+  font-size:13px;
+}
+.close-moon{
+  width:100%;
+  margin-top:18px;
+  padding:12px;
+  border:1px solid #ad72d5;
+  border-radius:10px;
+  color:#fff;
+  background:linear-gradient(180deg,#7d3aa8,#4d2568);
+  cursor:pointer;
+}
+@keyframes dashboardAwaken{
+  0%{opacity:0;transform:scale(1.015);filter:brightness(.22) saturate(.75)}
+  58%{opacity:1}
+  100%{opacity:1;transform:none;filter:brightness(1) saturate(1)}
+}
+@keyframes veilLift{to{opacity:0;visibility:hidden}}
+@keyframes torchAppear{to{opacity:1}}
+@keyframes torchWake{
+  from{transform:scale(.94) rotate(-1deg);filter:blur(2px);opacity:.48}
+  to{transform:scale(1.08) rotate(1.5deg);filter:blur(1px);opacity:.88}
+}
+@keyframes moonAppear{to{opacity:1}}
+@keyframes moonBreathe{
+  0%,100%{transform:scale(.95);opacity:.28}
+  50%{transform:scale(1.08);opacity:.58}
+}
+@keyframes chipIn{to{opacity:1;transform:none}}
+@media(max-width:700px){
+  .greeting-chip{right:8px;top:max(8px,env(safe-area-inset-top));font-size:10px;padding:7px 9px}
+  .moon-card{padding:20px}
+}
+@media(prefers-reduced-motion:reduce){
+  .dashboard-artboard,.dashboard-artboard::before,.dashboard-artboard::after,.arrival-veil,.greeting-chip{
+    animation:none!important;opacity:1!important;transform:none!important;filter:none!important;
+  }
+  .arrival-veil{display:none}
+}
+
+
+/* SUBTLE DASHBOARD MOTION v5.9 */
+.dashboard-artboard{
+  animation:
+    dashboardReveal 1.25s cubic-bezier(.2,.72,.2,1) both,
+    dashboardFloat 9s 1.3s ease-in-out infinite alternate;
+}
+.dashboard-artboard::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  z-index:2;
+  background:
+    radial-gradient(circle at 9% 11%,rgba(203,139,244,.18),transparent 7%),
+    radial-gradient(circle at 58% 11%,rgba(233,225,240,.10),transparent 9%),
+    linear-gradient(100deg,transparent 0 43%,rgba(255,255,255,.026) 50%,transparent 57%);
+  background-size:auto,auto,220% 100%;
+  mix-blend-mode:screen;
+  animation:
+    dashboardShimmer 10s 1.5s linear infinite,
+    softBreath 5.5s ease-in-out infinite;
+}
+.dashboard-artboard::after{
+  content:"";
+  position:absolute;
+  left:4.3%;
+  top:5.5%;
+  width:12%;
+  height:12%;
+  pointer-events:none;
+  z-index:3;
+  border-radius:50%;
+  background:
+    radial-gradient(circle at 50% 72%,
+      rgba(255,255,255,.95) 0 2%,
+      rgba(224,176,250,.62) 10%,
+      rgba(156,69,208,.28) 30%,
+      transparent 68%);
+  filter:blur(1.5px);
+  opacity:.64;
+  transform-origin:50% 78%;
+  animation:torchFlicker 1.85s ease-in-out infinite alternate;
+}
+.dashboard-embers{
+  position:absolute;
+  inset:0;
+  z-index:4;
+  pointer-events:none;
+  overflow:hidden;
+}
+.dashboard-embers i{
+  position:absolute;
+  left:var(--x);
+  top:var(--y);
+  width:3px;
+  height:3px;
+  border-radius:50%;
+  background:rgba(226,188,248,.9);
+  box-shadow:0 0 8px rgba(185,119,236,.72);
+  opacity:0;
+  animation:driftEmber var(--t) var(--d) ease-in-out infinite;
+}
+@keyframes dashboardReveal{
+  0%{opacity:0;filter:brightness(.38) saturate(.75);transform:scale(1.018)}
+  55%{opacity:1}
+  100%{opacity:1;filter:none;transform:none}
+}
+@keyframes dashboardFloat{
+  from{filter:brightness(1)}
+  to{filter:brightness(1.025)}
+}
+@keyframes dashboardShimmer{
+  from{background-position:0 0,0 0,-130% 0}
+  to{background-position:0 0,0 0,130% 0}
+}
+@keyframes softBreath{
+  0%,100%{opacity:.52}
+  50%{opacity:.82}
+}
+@keyframes torchFlicker{
+  0%{transform:scale(.94) rotate(-1deg);opacity:.44}
+  38%{transform:scale(1.03) rotate(1deg);opacity:.72}
+  72%{transform:scale(.98) rotate(-.4deg);opacity:.58}
+  100%{transform:scale(1.08) rotate(1.4deg);opacity:.82}
+}
+@keyframes driftEmber{
+  0%{opacity:0;transform:translate(0,12px) scale(.5)}
+  22%{opacity:.8}
+  68%{opacity:.55}
+  100%{opacity:0;transform:translate(18px,-42px) scale(1.05)}
+}
+@media(prefers-reduced-motion:reduce){
+  .dashboard-artboard,.dashboard-artboard::before,.dashboard-artboard::after,.dashboard-embers i{
+    animation:none!important;
+  }
+}
+
+</style>
+</head>
+<body>
+<main class="dashboard-page">
+<a class="portal" href="index.html">← Portal</a>
+<div class="dashboard-artboard" role="img" aria-label="Mahasa's Circle approved dashboard">
+<div class="dashboard-embers" aria-hidden="true">
+  <i style="--x:8%;--y:20%;--t:7s;--d:.4s"></i>
+  <i style="--x:14%;--y:31%;--t:8.5s;--d:2.1s"></i>
+  <i style="--x:29%;--y:18%;--t:9s;--d:1.2s"></i>
+  <i style="--x:48%;--y:24%;--t:10s;--d:3.4s"></i>
+  <i style="--x:66%;--y:17%;--t:8s;--d:4.2s"></i>
+  <i style="--x:82%;--y:28%;--t:9.5s;--d:2.8s"></i>
+</div>
+
+<a class="hotspot top-home" href="dashboard.html" aria-label="Home"></a><a class="hotspot top-threads" href="silver-threads.html" aria-label="Silver Threads"></a><a class="hotspot top-hearths" href="hearths.html" aria-label="Hearths"></a><a class="hotspot top-local" href="local-circle.html" aria-label="Local Circle"></a><a class="hotspot top-gatherings" href="gatherings.html" aria-label="Gatherings"></a><a class="hotspot top-market" href="marketplace.html" aria-label="Marketplace"></a><a class="hotspot top-library" href="library.html" aria-label="Library"></a>
+<a class="hotspot nav-home" href="dashboard.html" aria-label="Home"></a><a class="hotspot nav-threads" href="silver-threads.html" aria-label="Silver Threads"></a><a class="hotspot nav-hearths" href="hearths.html" aria-label="Hearths"></a><a class="hotspot nav-local" href="local-circle.html" aria-label="Local Circle"></a><a class="hotspot nav-gatherings" href="gatherings.html" aria-label="Gatherings"></a><a class="hotspot nav-market" href="marketplace.html" aria-label="Marketplace"></a><a class="hotspot nav-library" href="library.html" aria-label="Library"></a><a class="hotspot nav-profile" href="profile.html" aria-label="My Profile"></a><a class="hotspot nav-bookmarks" href="messages.html" aria-label="Bookmarks"></a><a class="hotspot nav-messages" href="messages.html" aria-label="Messages"></a><a class="hotspot nav-settings" href="profile.html" aria-label="Settings"></a><a class="hotspot nav-flame" href="profile.html" aria-label="The Eternal Flame"></a>
+<a class="hotspot card-threads" href="silver-threads.html" aria-label="Open Silver Threads"></a><a class="hotspot card-hearths" href="hearths.html" aria-label="Explore Hearths"></a><a class="hotspot card-local" href="local-circle.html" aria-label="Explore Local Circle"></a><a class="hotspot card-gatherings" href="gatherings.html" aria-label="Explore Gatherings"></a><a class="hotspot card-market" href="marketplace.html" aria-label="Shop Marketplace"></a><a class="hotspot card-library" href="library.html" aria-label="Explore Library"></a><a class="hotspot card-profile" href="profile.html" aria-label="View Profile"></a><a class="hotspot card-bookmarks" href="messages.html" aria-label="View Bookmarks"></a>
+<a class="hotspot upcoming" href="gatherings.html" aria-label="Upcoming Gatherings"></a><a class="hotspot local-map" href="local-circle.html" aria-label="View Local Circle map"></a><a class="hotspot activity" href="silver-threads.html" aria-label="Recent Activity"></a>
+<button class="hotspot feature-moon" id="openMoon" type="button" aria-label="Open current moon details"></button><a class="hotspot feature-hecate" href="hearths.html" aria-label="Join Hecate's Hearth"></a><a class="hotspot feature-shop" href="marketplace.html" aria-label="Visit Like the Moon Craft"></a>
+</div>
+</main>
+
+<div class="arrival-veil" aria-hidden="true"></div>
+<div class="greeting-chip" id="greetingChip">Welcome home, Bill</div>
+
+<div class="moon-modal" id="moonModal" role="dialog" aria-modal="true" aria-labelledby="moonTitle">
+  <div class="moon-card">
+    <div class="moon-orb" id="moonOrb" aria-hidden="true"></div>
+    <h2 id="moonTitle">Current Moon</h2>
+    <div class="illumination" id="moonIllumination"></div>
+    <p id="moonMeaning"></p>
+    <div class="countdown" id="moonCountdown"></div>
+    <button class="close-moon" id="closeMoon" type="button">Return to the Circle</button>
+  </div>
+</div>
+
+<div style="position:fixed;right:10px;bottom:10px;z-index:50;padding:6px 9px;border-radius:999px;background:rgba(7,5,13,.78);border:1px solid rgba(235,225,241,.18);color:#b9aec1;font:9px system-ui">PUBLIC DEMO v5.8</div>
+<div id="firstTorchWelcome" style="position:fixed;inset:0;z-index:150;display:none;place-items:center;padding:18px;background:rgba(2,1,5,.78);backdrop-filter:blur(14px)">
+  <section style="width:min(520px,100%);padding:26px 22px;text-align:center;border:1px solid rgba(220,182,241,.34);border-radius:22px;background:linear-gradient(145deg,#1b0e25,#08040d);box-shadow:0 30px 100px rgba(0,0,0,.68)">
+    <div style="font-size:62px;filter:drop-shadow(0 0 20px rgba(193,113,237,.75))">🔥</div>
+    <p style="margin:8px 0;color:#c993ec;text-transform:uppercase;letter-spacing:.18em;font-size:10px">Welcome Home</p>
+    <h2 style="font:400 38px Georgia,serif;margin:0;color:#f5eff7">Your first Torch is burning.</h2>
+    <p style="color:#cabfd0;line-height:1.6">Your sigil has been carried into the Circle. You can return to The Forge from your Torch profile whenever your path changes.</p>
+    <button id="closeFirstTorch" style="width:100%;padding:13px;border:1px solid #c47ff0;border-radius:11px;color:#fff;background:linear-gradient(180deg,#8e43ba,#53256f);font:15px Georgia,serif;cursor:pointer">Enter the Circle</button>
+  </section>
+</div>
+<script>
+(() => {
+  const q = new URLSearchParams(location.search);
+  const welcome = document.getElementById('firstTorchWelcome');
+  if(q.get('firstTorch') === '1' && welcome){
+    welcome.style.display='grid';
+    document.body.style.overflow='hidden';
+    document.getElementById('closeFirstTorch').onclick=()=>{
+      welcome.style.display='none';
+      document.body.style.overflow='';
+      history.replaceState({},'',location.pathname);
+    };
+  }
+})();
+</script>
+
+</body>
+
+<script>
+(function(){
+  const greeting = document.getElementById("greetingChip");
+  const hour = new Date().getHours();
+  greeting.textContent =
+    hour < 5 ? "The Circle is quiet tonight, Bill" :
+    hour < 12 ? "Good morning, Bill" :
+    hour < 17 ? "Good afternoon, Bill" :
+    hour < 21 ? "Good evening, Bill" :
+    "Welcome back, Bill";
+
+  const synodic = 29.53058867;
+  const knownNew = Date.UTC(2000,0,6,18,14);
+  const now = new Date();
+  const age = ((((now.getTime() - knownNew) / 86400000) % synodic) + synodic) % synodic;
+  const fraction = age / synodic;
+  const illumination = Math.round((1 - Math.cos(2 * Math.PI * fraction)) / 2 * 100);
+
+  let name, meaning, gradient;
+  if(age < 1.84566 || age >= 27.68493){
+    name="New Moon"; meaning="A quiet threshold for rest, intention, and beginning again.";
+    gradient="radial-gradient(circle,#17121d 0 66%,#08060b 100%)";
+  }else if(age < 5.53699){
+    name="Waxing Crescent"; meaning="A time for building intention and taking the first meaningful steps forward.";
+    gradient="linear-gradient(90deg,#17121d 0 57%,#d9d3dd 59% 100%)";
+  }else if(age < 9.22831){
+    name="First Quarter"; meaning="A time for decisions, courage, action, and steady momentum.";
+    gradient="linear-gradient(90deg,#17121d 0 50%,#d9d3dd 50% 100%)";
+  }else if(age < 12.91963){
+    name="Waxing Gibbous"; meaning="A time to refine your work, remain patient, and prepare for culmination.";
+    gradient="linear-gradient(90deg,#3b3541 0 18%,#d9d3dd 35% 100%)";
+  }else if(age < 16.61096){
+    name="Full Moon"; meaning="A time for illumination, celebration, gratitude, and conscious release.";
+    gradient="radial-gradient(circle at 35% 32%,#fff 0 7%,#d7d2dc 33%,#827b87 66%,#332d39 100%)";
+  }else if(age < 20.30228){
+    name="Waning Gibbous"; meaning="A time for gratitude, sharing wisdom, and reflecting on what has been learned.";
+    gradient="linear-gradient(90deg,#d9d3dd 0 65%,#3b3541 82% 100%)";
+  }else if(age < 23.99361){
+    name="Last Quarter"; meaning="A time for clearing, forgiveness, release, and making room for what comes next.";
+    gradient="linear-gradient(90deg,#d9d3dd 0 50%,#17121d 50% 100%)";
+  }else{
+    name="Waning Crescent"; meaning="A time for surrender, restoration, and listening to quiet inner wisdom.";
+    gradient="linear-gradient(90deg,#d9d3dd 0 42%,#17121d 44% 100%)";
+  }
+
+  const nextFullAge = 14.765294;
+  let daysToFull = nextFullAge - age;
+  if(daysToFull < 0) daysToFull += synodic;
+  const nextNew = synodic - age;
+
+  document.getElementById("moonTitle").textContent = name;
+  document.getElementById("moonIllumination").textContent = "Illumination: " + illumination + "%";
+  document.getElementById("moonMeaning").textContent = meaning;
+  document.getElementById("moonOrb").style.background = gradient;
+  document.getElementById("moonCountdown").textContent =
+    "Next full moon in about " + Math.max(1,Math.round(daysToFull)) +
+    " days • Next new moon in about " + Math.max(1,Math.round(nextNew)) + " days";
+
+  const modal = document.getElementById("moonModal");
+  document.getElementById("openMoon").addEventListener("click",()=>{
+    modal.classList.add("open");
+    document.body.style.overflow="hidden";
+    document.getElementById("closeMoon").focus();
+  });
+  function closeMoon(){
+    modal.classList.remove("open");
+    document.body.style.overflow="";
+    document.getElementById("openMoon").focus();
+  }
+  document.getElementById("closeMoon").addEventListener("click",closeMoon);
+  modal.addEventListener("click",e=>{if(e.target===modal) closeMoon();});
+  document.addEventListener("keydown",e=>{if(e.key==="Escape" && modal.classList.contains("open")) closeMoon();});
+})();
+</script>
+
+</html>

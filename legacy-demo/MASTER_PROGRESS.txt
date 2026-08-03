@@ -1,0 +1,25 @@
+MAHASA'S CIRCLE MASTER BUILD v6.1 — THE FORGE
+
+LOCKED MILESTONES
+- v6.0 Finished Landing Page
+- v6.1 The Forge and Personal Sigil Onboarding
+
+CURRENT WORKING DEMO
+- First Flame introduction
+- Portrait portal
+- Realistic flame passage
+- Personal sigil creation
+- Personal Torch preview
+- First Torch lighting
+- Approved animated dashboard
+- Silver Threads
+- Hearths
+- Local Circle
+- Gatherings
+- Marketplace
+- Library
+- Profile
+- Messages
+
+NEXT
+Build the member's Torch page using the forged sigil.
