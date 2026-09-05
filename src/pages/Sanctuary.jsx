@@ -3,16 +3,42 @@ import FirstFlameCeremony from '../components/FirstFlameCeremony';
 import AmbientAudio from '../components/AmbientAudio';
 
 const links = [
-  ['top-home','/sanctuary'],['top-threads','/sanctuary'],['top-hearths','/sanctuary'],
-  ['top-local','/sanctuary'],['top-gatherings','/sanctuary'],['top-market','/sanctuary'],['top-library','/sanctuary'],
-  ['nav-home','/sanctuary'],['nav-threads','/sanctuary'],['nav-hearths','/sanctuary'],['nav-local','/sanctuary'],
-  ['nav-gatherings','/sanctuary'],['nav-market','/sanctuary'],['nav-library','/sanctuary'],
-  ['nav-profile','/torch'],['nav-bookmarks','/sanctuary'],['nav-messages','/sanctuary'],['nav-settings','/torch'],
-  ['nav-flame','/torch'],['card-threads','/sanctuary'],['card-hearths','/sanctuary'],['card-local','/sanctuary'],
-  ['card-gatherings','/sanctuary'],['card-market','/sanctuary'],['card-library','/sanctuary'],
-  ['card-profile','/torch'],['card-bookmarks','/sanctuary'],['upcoming','/sanctuary'],
-  ['local-map','/sanctuary'],['activity','/sanctuary'],['feature-moon','/sanctuary'],
-  ['feature-hecate','/sanctuary'],['feature-shop','/sanctuary']
+  ['top-home','/sanctuary'],
+  ['top-threads','/section/threads'],
+  ['top-hearths','/section/hearths'],
+  ['top-local','/section/local'],
+  ['top-gatherings','/section/gatherings'],
+  ['top-market','/section/marketplace'],
+  ['top-library','/section/library'],
+
+  ['nav-home','/sanctuary'],
+  ['nav-threads','/section/threads'],
+  ['nav-hearths','/section/hearths'],
+  ['nav-local','/section/local'],
+  ['nav-gatherings','/section/gatherings'],
+  ['nav-market','/section/marketplace'],
+  ['nav-library','/section/library'],
+  ['nav-profile','/torch'],
+  ['nav-bookmarks','/section/bookmarks'],
+  ['nav-messages','/section/messages'],
+  ['nav-settings','/section/settings'],
+  ['nav-flame','/torch'],
+
+  ['card-threads','/section/threads'],
+  ['card-hearths','/section/hearths'],
+  ['card-local','/section/local'],
+  ['card-gatherings','/section/gatherings'],
+  ['card-market','/section/marketplace'],
+  ['card-library','/section/library'],
+  ['card-profile','/torch'],
+  ['card-bookmarks','/section/bookmarks'],
+
+  ['upcoming','/section/upcoming'],
+  ['local-map','/section/map'],
+  ['activity','/section/activity'],
+  ['feature-moon','/section/moonwork'],
+  ['feature-hecate','/section/hecate'],
+  ['feature-shop','/section/shop']
 ];
 
 export default function Sanctuary({ navigate }) {

@@ -3,6 +3,7 @@ import Landing from './pages/Landing';
 import Sanctuary from './pages/Sanctuary';
 import Forge from './pages/Forge';
 import Torch from './pages/Torch';
+import CircleSection from './pages/CircleSection';
 
 const routes = {
   '/': Landing,
@@ -13,7 +14,7 @@ const routes = {
 
 function currentPath() {
   const raw = window.location.hash.replace(/^#/, '') || '/';
-  return routes[raw] ? raw : '/';
+  return routes[raw] ? raw : raw;
 }
 
 export default function App() {
@@ -25,7 +26,24 @@ export default function App() {
     return () => window.removeEventListener('hashchange', onHash);
   }, []);
 
+  const navigate = (to) => {
+    window.location.hash = to;
+  };
+
   const Page = routes[path];
 
-  return <Page navigate={(to) => { window.location.hash = to; }} />;
+  if (Page) {
+    return <Page navigate={navigate} />;
+  }
+
+  if (path.startsWith('/section/')) {
+    return (
+      <CircleSection
+        section={path.replace('/section/', '')}
+        navigate={navigate}
+      />
+    );
+  }
+
+  return <Landing navigate={navigate} />;
 }
