@@ -53,57 +53,21 @@ button,input,textarea{font:inherit}button{color:inherit}.eyebrow{text-transform:
 .e1{left:9%;top:22%;animation:approvedEmber 8s .5s ease-in-out infinite}.e2{left:14%;top:31%;animation:approvedEmber 10s 2s ease-in-out infinite}.e3{left:33%;top:18%;animation:approvedEmber 9s 3.4s ease-in-out infinite}.e4{left:66%;top:23%;animation:approvedEmber 11s 1.2s ease-in-out infinite}
 .approved-page-controls{position:fixed;z-index:40;left:10px;top:max(10px,env(safe-area-inset-top));right:10px;display:flex;justify-content:space-between;pointer-events:none}.approved-page-controls>*{pointer-events:auto}
 .portal-return{padding:9px 12px;border:1px solid rgba(235,225,241,.24);border-radius:999px;color:#fff;background:rgba(6,3,10,.74);backdrop-filter:blur(15px);cursor:pointer}
-.top-home{left:19%;top:1%;width:6.2%;height:3.3%}.top-threads{left:25.7%;top:1%;width:10.5%;height:3.3%}.top-hearths{left:36.7%;top:1%;width:7.2%;height:3.3%}.top-local{left:44.5%;top:1%;width:5.8%;height:3.3%}.top-gatherings{left:50.9%;top:1%;width:9%;height:3.3%}.top-market{left:60.5%;top:1%;width:9.4%;height:3.3%}.top-library{left:70.5%;top:1%;width:6.4%;height:3.3%}
-.nav-home{left:1.4%;top:14.1%;width:15.8%;height:3.1%}.nav-threads{left:1.4%;top:17.3%;width:15.8%;height:3.1%}.nav-hearths{left:1.4%;top:20.5%;width:15.8%;height:3.1%}.nav-local{left:1.4%;top:23.7%;width:15.8%;height:3.1%}.nav-gatherings{left:1.4%;top:26.9%;width:15.8%;height:3.1%}.nav-market{left:1.4%;top:30.1%;width:15.8%;height:3.1%}.nav-library{left:1.4%;top:33.3%;width:15.8%;height:3.1%}.nav-profile{left:1.4%;top:37.5%;width:15.8%;height:3.1%}.nav-bookmarks{left:1.4%;top:40.7%;width:15.8%;height:3.1%}.nav-messages{left:1.4%;top:43.9%;width:15.8%;height:3.1%}.nav-settings{left:1.4%;top:47.1%;width:15.8%;height:3.1%}.nav-flame{left:1.4%;top:51.2%;width:15.8%;height:15.2%}
-.card-threads{left:19.4%;top:34%;width:13.1%;height:13.3%}.card-hearths{left:32.9%;top:34%;width:13.1%;height:13.3%}.card-local{left:46.4%;top:34%;width:13.1%;height:13.3%}.card-gatherings{left:59.9%;top:34%;width:13.1%;height:13.3%}.card-market{left:19.4%;top:48.4%;width:13.1%;height:13.3%}.card-library{left:32.9%;top:48.4%;width:13.1%;height:13.3%}.card-profile{left:46.4%;top:48.4%;width:13.1%;height:13.3%}.card-bookmarks{left:59.9%;top:48.4%;width:13.1%;height:13.3%}
-.upcoming{left:74%;top:6.5%;width:24.5%;height:19.4%}.local-map{left:74%;top:27.2%;width:24.5%;height:18.4%}.activity{left:74%;top:46.8%;width:24.5%;height:19.9%}
-.feature-moon{left:2.8%;top:68.3%;width:29%;height:14%}.feature-hecate{left:32.4%;top:68.3%;width:33%;height:14%}.feature-shop{left:66%;top:68.3%;width:31.5%;height:14%}
-@keyframes approvedReveal{from{opacity:0;transform:scale(1.012);filter:brightness(.35) saturate(.78)}to{opacity:1;transform:none;filter:none}}
-@keyframes approvedMoonBreath{0%,100%{opacity:.34;transform:scale(.96)}50%{opacity:.68;transform:scale(1.06)}}
-@keyframes approvedTorchFlicker{from{opacity:.4;transform:scale(.94) rotate(-1deg)}to{opacity:.8;transform:scale(1.08) rotate(1.4deg)}}
-@keyframes approvedLakeMove{from{background-position:0 0}to{background-position:120px 8px}}
-@keyframes approvedEmber{0%{opacity:0;transform:translate(0,12px)}20%{opacity:.75}75%{opacity:.4}100%{opacity:0;transform:translate(20px,-44px)}}
-2@media(prefers-reduced-motion:reduce){.approved-dashboard-art,.moon-glow,.torch-glow,.lake-shimmer,.ember{animation:none!important}.approved-sanctuary.revealed .approved-dashboard-art{opacity:1;filter:none;transform:none}}
-
-/* Sanctuary left-panel hotspot alignment correction */
-.nav-home{top:17.3%}
-.nav-threads{top:20.5%}
-.nav-hearths{top:23.7%}
-.nav-local{top:26.9%}
-.nav-gatherings{top:30.1%}
-.nav-market{top:33.3%}
-.nav-library{top:36.5%}
-.nav-profile{top:40.7%}
-.nav-bookmarks{top:43.9%}
-.nav-messages{top:47.1%}
-.nav-settings{top:50.3%}
-
-/* Precise upper-left nav fix */\.nav-home{top:14.1%;transform:none}
-.nav-threads{top:17.3%;transform:none}
-.nav-hearths{top:20.5%;transform:none}/* FINAL SANCTUARY LEFT NAV — single source of truth */
-/* FINAL SANCTUARY LEFT NAV — aligned to artwork */
-.nav-home       { top:20.1% !important; height:3.1% !important; transform:none !important; }
-.nav-threads    { top:23.8% !important; height:3.1% !important; transform:none !important; }
-.nav-hearths    { top:27.2% !important; height:3.1% !important; transform:none !important; }
-.nav-local      { top:30.8% !important; height:3.1% !important; transform:none !important; }
-.nav-gatherings { top:34.4% !important; height:3.1% !important; transform:none !important; }
-.nav-market     { top:38.3% !important; height:3.1% !important; transform:none !important; }
-.nav-library    { top:42.3% !important; height:3.1% !important; transform:none !important; }
-
-.nav-profile    { top:46.2% !important; height:3.1% !important; transform:none !important; }
-.nav-messages   { top:53.1% !important; height:3.1% !important; transform:none !important; }
-.nav-bookmarks  { top:57.2% !important; height:3.1% !important; transform:none !important; }
-.nav-settings   { top:61.1% !important; height:3.1% !important; transform:none !important; }
-
-/* TEMP DEBUG — SHOW ALL CLICKABLE HOTSPOTS */
-.approved-hotspot {
-  background: rgba(255, 0, 255, 0.28) !important;
-  outline: 3px solid #ff00ff !important;
-}/* Disable oversized Torch hotspot */
-.nav-flame {
-  display: none !important;
+/* Sanctuary left navigation — current cinematic artwork */
+.nav-threads,
+.nav-hearths,
+.nav-local,
+.nav-gatherings,
+.nav-market,
+.nav-library,
+.nav-profile,
+.nav-messages,
+.nav-bookmarks,
+.nav-settings {
+  left:1.4%;
+  width:15.8%;
 }
-/* FINAL LEFT NAV ALIGNMENT — sanctuary-cinematic */
+
 .nav-threads    { top:20.3% !important; height:3.1% !important; transform:none !important; }
 .nav-hearths    { top:24.4% !important; height:3.1% !important; transform:none !important; }
 .nav-local      { top:28.4% !important; height:3.1% !important; transform:none !important; }
@@ -111,12 +75,16 @@ button,input,textarea{font:inherit}button{color:inherit}.eyebrow{text-transform:
 .nav-market     { top:36.5% !important; height:3.1% !important; transform:none !important; }
 .nav-library    { top:40.6% !important; height:3.1% !important; transform:none !important; }
 .nav-profile    { top:44.7% !important; height:3.1% !important; transform:none !important; }
-
 .nav-messages   { top:52.3% !important; height:3.1% !important; transform:none !important; }
 .nav-bookmarks  { top:56.3% !important; height:3.1% !important; transform:none !important; }
 .nav-settings   { top:60.2% !important; height:3.1% !important; transform:none !important; }
 
-
-
-
-
+@keyframes approvedReveal{from{opacity:0;transform:scale(1.012);filter:brightness(.35) saturate(.78)}to{opacity:1;transform:none;filter:none}}
+@keyframes approvedMoonBreath{0%,100%{opacity:.34;transform:scale(.96)}50%{opacity:.68;transform:scale(1.06)}}
+@keyframes approvedTorchFlicker{from{opacity:.4;transform:scale(.94) rotate(-1deg)}to{opacity:.8;transform:scale(1.08) rotate(1.4deg)}}
+@keyframes approvedLakeMove{from{background-position:0 0}to{background-position:120px 8px}}
+@keyframes approvedEmber{0%{opacity:0;transform:translate(0,12px)}20%{opacity:.75}75%{opacity:.4}100%{opacity:0;transform:translate(20px,-44px)}}
+@media(prefers-reduced-motion:reduce){
+  .approved-dashboard-art,.moon-glow,.torch-glow,.lake-shimmer,.ember{animation:none!important}
+  .approved-sanctuary.revealed .approved-dashboard-art{opacity:1;filter:none;transform:none}
+}
