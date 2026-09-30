@@ -702,3 +702,183 @@ button,input,textarea{font:inherit}button{color:inherit}.eyebrow{text-transform:
   }
   .flame-walkthrough{background:#100619}
 }
+
+
+
+/* FIRE WALKTHROUGH V2 — turbulent, realistic flame sheets */
+.flame-walkthrough-real{
+  position:fixed;
+  inset:0;
+  z-index:12000;
+  overflow:hidden;
+  background:#020104;
+  isolation:isolate;
+}
+.real-source{
+  inset:-3%;
+  background:url('/assets/landing-sanctuary.png') center/cover no-repeat;
+  transform-origin:50% 30%;
+  animation:realWalkIntoFire 2.05s cubic-bezier(.16,.72,.18,1) forwards;
+}
+.real-fire-svg{
+  position:absolute;
+  inset:-6%;
+  z-index:5;
+  width:112%;
+  height:112%;
+  overflow:visible;
+  mix-blend-mode:screen;
+  filter:saturate(1.12) contrast(1.06);
+}
+.fire-sheet{
+  transform-box:fill-box;
+  transform-origin:center bottom;
+}
+.fire-sheet-left{
+  animation:realFireLeft 2.55s .28s cubic-bezier(.12,.75,.2,1) forwards;
+}
+.fire-sheet-right{
+  animation:realFireRight 2.55s .28s cubic-bezier(.12,.75,.2,1) forwards;
+}
+.fire-sheet-bottom{
+  animation:realFireBottom 2.35s .48s cubic-bezier(.12,.78,.22,1) forwards;
+}
+.fire-haze-sheet{
+  animation:realFireHaze 2.5s .35s ease forwards;
+}
+.real-fire-embers i{
+  position:absolute;
+  z-index:8;
+  left:var(--x);
+  bottom:-3%;
+  width:var(--size);
+  height:var(--size);
+  border-radius:50%;
+  opacity:0;
+  background:
+    radial-gradient(circle,#fff 0 22%,#ffd9a0 28%,#d78bff 58%,#6685ff 82%);
+  box-shadow:
+    0 0 8px rgba(255,230,190,.9),
+    0 0 14px rgba(200,112,255,.72);
+  animation:realEmber 2.65s var(--delay) ease-out forwards;
+}
+.real-fire-heat{
+  position:absolute;
+  z-index:7;
+  inset:-18%;
+  pointer-events:none;
+  background:
+    repeating-radial-gradient(
+      ellipse at 50% 62%,
+      transparent 0 24px,
+      rgba(255,233,255,.035) 26px 28px,
+      rgba(173,94,220,.055) 30px 33px,
+      transparent 36px 54px
+    );
+  filter:blur(7px);
+  animation:realHeat 2.7s .42s ease forwards;
+}
+.real-fire-bloom{
+  position:absolute;
+  z-index:9;
+  left:50%;
+  top:50%;
+  width:12vmin;
+  height:12vmin;
+  border-radius:50%;
+  transform:translate(-50%,-50%) scale(.2);
+  background:
+    radial-gradient(
+      circle,
+      #fff 0 8%,
+      #fff4d8 13%,
+      #f1d6ff 23%,
+      #ce7cff 38%,
+      #7d5fff 52%,
+      rgba(255,124,73,.24) 65%,
+      transparent 75%
+    );
+  filter:blur(2px);
+  mix-blend-mode:screen;
+  opacity:0;
+  animation:realBloom 1.1s 2.35s ease-in forwards;
+}
+.real-fire-copy{
+  z-index:10;
+  animation:realFireCopy 3.05s ease forwards;
+}
+.real-fire-copy strong{
+  color:#fff7ff;
+  text-shadow:
+    0 0 18px rgba(255,255,255,.18),
+    0 0 38px rgba(197,104,245,.74);
+}
+.real-fire-copy span{
+  color:#edd5f7;
+  text-shadow:0 0 20px rgba(140,77,200,.48);
+}
+
+@keyframes realWalkIntoFire{
+  0%{
+    transform:scale(1.01);
+    filter:brightness(.8) saturate(1.02);
+  }
+  58%{
+    transform:scale(2.15);
+    filter:brightness(.94) saturate(1.18);
+  }
+  100%{
+    transform:scale(5.4);
+    filter:brightness(.34) saturate(1.34) blur(2.5px);
+  }
+}
+@keyframes realFireLeft{
+  0%{transform:translate(-48%,34%) scale(.72,.55) rotate(-8deg);opacity:.02}
+  18%{opacity:.72}
+  58%{transform:translate(-8%,2%) scale(1.03,1.08) rotate(-2deg);opacity:.96}
+  100%{transform:translate(24%,-18%) scale(1.22,1.28) rotate(4deg);opacity:1}
+}
+@keyframes realFireRight{
+  0%{transform:translate(48%,34%) scale(.72,.55) rotate(8deg);opacity:.02}
+  18%{opacity:.72}
+  58%{transform:translate(8%,2%) scale(1.03,1.08) rotate(2deg);opacity:.96}
+  100%{transform:translate(-24%,-18%) scale(1.22,1.28) rotate(-4deg);opacity:1}
+}
+@keyframes realFireBottom{
+  0%{transform:translateY(62%) scaleY(.52);opacity:.04}
+  22%{opacity:.65}
+  60%{transform:translateY(8%) scaleY(1.02);opacity:.92}
+  100%{transform:translateY(-34%) scaleY(1.32);opacity:1}
+}
+@keyframes realFireHaze{
+  0%{opacity:0;transform:translateY(22%) scale(.8)}
+  35%{opacity:.42}
+  100%{opacity:.72;transform:translateY(-12%) scale(1.14)}
+}
+@keyframes realEmber{
+  0%{opacity:0;transform:translate(0,0) scale(.45)}
+  12%{opacity:1}
+  72%{opacity:.72}
+  100%{opacity:0;transform:translate(var(--drift),-115vh) scale(1.45)}
+}
+@keyframes realHeat{
+  from{opacity:0;transform:translateY(9%) scale(1)}
+  to{opacity:.95;transform:translateY(-14%) scale(1.14)}
+}
+@keyframes realBloom{
+  0%{opacity:0;transform:translate(-50%,-50%) scale(.2)}
+  20%{opacity:.9}
+  100%{opacity:1;transform:translate(-50%,-50%) scale(20)}
+}
+@keyframes realFireCopy{
+  0%,14%{opacity:0;transform:translateY(8px) scale(.985);filter:blur(5px)}
+  28%,66%{opacity:1;transform:none;filter:none}
+  88%,100%{opacity:0;transform:scale(1.03);filter:blur(3px)}
+}
+
+@media(prefers-reduced-motion:reduce){
+  .real-source,.fire-sheet,.fire-haze-sheet,.real-fire-embers i,.real-fire-heat,.real-fire-bloom{
+    animation:none!important;
+  }
+  .flame-walkthrough-real{background:#100619}
+}
