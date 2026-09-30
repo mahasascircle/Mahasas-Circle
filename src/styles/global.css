@@ -410,6 +410,7 @@ button,input,textarea{font:inherit}button{color:inherit}.eyebrow{text-transform:
   filter:drop-shadow(0 30px 80px rgba(0,0,0,.55));
 }
 .landing-artwork-hit{
+  transform: translate(12px, 12px);
   position:absolute;
   z-index:8;
   border:0;
