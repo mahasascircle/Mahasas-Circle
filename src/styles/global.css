@@ -756,10 +756,11 @@ button,input,textarea{font:inherit}button{color:inherit}.eyebrow{text-transform:
   border-radius:50%;
   opacity:0;
   background:
-    radial-gradient(circle,#fff 0 22%,#ffd9a0 28%,#d78bff 58%,#6685ff 82%);
+    radial-gradient(circle,#ffffff 0 18%,#f8e8ff 26%,#d89cff 52%,#9d52ff 76%,#5420a0 100%);
   box-shadow:
-    0 0 8px rgba(255,230,190,.9),
-    0 0 14px rgba(200,112,255,.72);
+    0 0 8px rgba(255,255,255,.85),
+    0 0 14px rgba(212,140,255,.72),
+    0 0 24px rgba(124,55,255,.48);
   animation:realEmber 2.65s var(--delay) ease-out forwards;
 }
 .real-fire-heat{
@@ -790,13 +791,13 @@ button,input,textarea{font:inherit}button{color:inherit}.eyebrow{text-transform:
   background:
     radial-gradient(
       circle,
-      #fff 0 8%,
-      #fff4d8 13%,
-      #f1d6ff 23%,
-      #ce7cff 38%,
-      #7d5fff 52%,
-      rgba(255,124,73,.24) 65%,
-      transparent 75%
+      #ffffff 0 8%,
+      #fff7ff 14%,
+      #f1dcff 25%,
+      #d38fff 40%,
+      #9e52ff 56%,
+      rgba(115,46,201,.38) 68%,
+      transparent 78%
     );
   filter:blur(2px);
   mix-blend-mode:screen;
