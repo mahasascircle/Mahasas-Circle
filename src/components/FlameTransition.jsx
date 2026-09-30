@@ -2,7 +2,7 @@ import React,{useEffect} from 'react';
 
 function vibrate(pattern){
   if('vibrate' in navigator){
-    try{ navigator.vibrate(pattern); }catch{}
+    try{navigator.vibrate(pattern)}catch{}
   }
 }
 
@@ -14,46 +14,50 @@ export default function FlameTransition({
 }){
   useEffect(()=>{
     if(!active) return;
-    vibrate(12);
-    const a=setTimeout(()=>vibrate([18,28,26,24,34]),460);
-    const b=setTimeout(()=>vibrate(10),2050);
-    const c=setTimeout(onComplete,2700);
+    vibrate(14);
+    const a=setTimeout(()=>vibrate([18,24,28,22,34]),520);
+    const b=setTimeout(()=>vibrate([12,18,10]),2200);
+    const c=setTimeout(onComplete,3250);
     return()=>{clearTimeout(a);clearTimeout(b);clearTimeout(c)};
   },[active,onComplete]);
 
   if(!active) return null;
 
   return (
-    <div className="flame-transition flame-cleanse" aria-live="polite">
-      <div className="flame-darken"/>
-      <div className="transition-stars"/>
+    <div className="flame-transition flame-walkthrough" aria-live="polite">
+      <div className="walkthrough-source" aria-hidden="true"/>
+      <div className="walkthrough-vignette" aria-hidden="true"/>
 
-      <div className="cleanse-glow violet" aria-hidden="true"/>
-      <div className="cleanse-glow blue" aria-hidden="true"/>
-      <div className="cleanse-glow gold" aria-hidden="true"/>
+      <div className="walkthrough-fire left" aria-hidden="true">
+        {Array.from({length:10}).map((_,i)=><i key={i} className={`walk-flame f${i+1}`}/>)}
+      </div>
 
-      <div className="embers cleanse-embers" aria-hidden="true">
-        {Array.from({length:42}).map((_,i)=>(
-          <i key={i} style={{
-            '--x':`${2+(i*7.1)%96}%`,
-            '--delay':`${(i%13)*.055}s`,
-            '--scale':`${.5+(i%7)*.12}`,
-            '--drift':`${-34+(i%11)*7}px`
-          }}/>
+      <div className="walkthrough-fire right" aria-hidden="true">
+        {Array.from({length:10}).map((_,i)=><i key={i} className={`walk-flame f${i+1}`}/>)}
+      </div>
+
+      <div className="walkthrough-fire bottom" aria-hidden="true">
+        {Array.from({length:12}).map((_,i)=><i key={i} className={`walk-flame b${i+1}`}/>)}
+      </div>
+
+      <div className="walkthrough-embers" aria-hidden="true">
+        {Array.from({length:48}).map((_,i)=>(
+          <i
+            key={i}
+            style={{
+              '--x':`${3+(i*11.7)%94}%`,
+              '--delay':`${(i%16)*.045}s`,
+              '--size':`${2+(i%4)}px`,
+              '--drift':`${-55+(i%13)*9}px`
+            }}
+          />
         ))}
       </div>
 
-      <div className="cleanse-fire left" aria-hidden="true">
-        {Array.from({length:9}).map((_,i)=><span key={i} className={`cleanse-tongue t${i+1}`}/>)}
-      </div>
+      <div className="walkthrough-heat" aria-hidden="true"/>
+      <div className="walkthrough-bloom" aria-hidden="true"/>
 
-      <div className="cleanse-fire right" aria-hidden="true">
-        {Array.from({length:9}).map((_,i)=><span key={i} className={`cleanse-tongue t${i+1}`}/>)}
-      </div>
-
-      <div className="cleanse-sweep" aria-hidden="true"/>
-      <div className="heat-haze"/>
-      <div className="transition-copy">
+      <div className="transition-copy walkthrough-copy">
         <strong>{title}</strong>
         <span>{subtitle}</span>
       </div>
