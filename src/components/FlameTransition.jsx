@@ -17,7 +17,7 @@ export default function FlameTransition({
     vibrate(14);
     const a=setTimeout(()=>vibrate([18,24,30,20,34]),620);
     const b=setTimeout(()=>vibrate([12,16,10]),2500);
-    const c=setTimeout(onComplete,3800);
+    const c=setTimeout(onComplete,4400);
     return()=>{clearTimeout(a);clearTimeout(b);clearTimeout(c)};
   },[active,onComplete]);
 
@@ -158,6 +158,72 @@ export default function FlameTransition({
             }}
           />
         ))}
+      </div>
+
+      <div className="flame-initiate" aria-hidden="true">
+        <svg viewBox="0 0 220 520" role="presentation">
+          <defs>
+            <linearGradient id="initiateBody" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stopColor="#0d0713"/>
+              <stop offset="55%" stopColor="#12091a"/>
+              <stop offset="100%" stopColor="#030104"/>
+            </linearGradient>
+            <linearGradient id="initiateRim" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0%" stopColor="#7b37d4" stopOpacity=".25"/>
+              <stop offset="50%" stopColor="#f0cfff" stopOpacity=".9"/>
+              <stop offset="100%" stopColor="#7b37d4" stopOpacity=".25"/>
+            </linearGradient>
+            <filter id="initiateGlow" x="-50%" y="-30%" width="200%" height="180%">
+              <feGaussianBlur stdDeviation="5" result="blur"/>
+              <feMerge>
+                <feMergeNode in="blur"/>
+                <feMergeNode in="SourceGraphic"/>
+              </feMerge>
+            </filter>
+          </defs>
+
+          <path
+            className="initiate-rim"
+            d="M110 30 C81 30 66 55 68 84 C69 96 73 105 80 113 C57 129 45 157 42 194 C38 251 26 314 18 399 C15 439 29 475 50 504 L170 504 C191 475 205 439 202 399 C194 314 182 251 178 194 C175 157 163 129 140 113 C147 105 151 96 152 84 C154 55 139 30 110 30 Z"
+            fill="none"
+            stroke="url(#initiateRim)"
+            strokeWidth="5"
+            opacity=".78"
+            filter="url(#initiateGlow)"
+          />
+
+          <ellipse cx="110" cy="76" rx="36" ry="45" fill="url(#initiateBody)"/>
+
+          <path
+            className="initiate-hair"
+            d="M72 67 C73 34 91 20 110 20 C134 20 150 38 151 68 C152 102 139 128 142 164 C133 146 125 135 110 132 C95 135 87 146 78 164 C81 128 68 102 72 67 Z"
+            fill="#08040d"
+          />
+
+          <path
+            className="initiate-body"
+            d="M83 118 C68 128 56 148 52 179 C46 229 35 286 28 354 C23 402 29 458 54 506 L166 506 C191 458 197 402 192 354 C185 286 174 229 168 179 C164 148 152 128 137 118 C131 134 123 143 110 145 C97 143 89 134 83 118 Z"
+            fill="url(#initiateBody)"
+          />
+
+          <path
+            className="initiate-left-arm"
+            d="M58 164 C43 190 38 230 39 280 C40 318 35 351 26 381 C21 395 23 406 32 411 C40 416 49 411 52 399 C62 360 66 323 63 279 C60 234 66 198 75 177 Z"
+            fill="#09050e"
+          />
+
+          <path
+            className="initiate-right-arm"
+            d="M162 164 C177 190 182 230 181 280 C180 318 185 351 194 381 C199 395 197 406 188 411 C180 416 171 411 168 399 C158 360 154 323 157 279 C160 234 154 198 145 177 Z"
+            fill="#09050e"
+          />
+
+          <path
+            d="M84 505 C79 472 77 438 80 402 C84 365 94 328 110 302 C126 328 136 365 140 402 C143 438 141 472 136 505 Z"
+            fill="#050208"
+            opacity=".9"
+          />
+        </svg>
       </div>
 
       <div className="real-fire-heat" aria-hidden="true"/>
