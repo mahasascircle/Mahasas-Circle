@@ -3,6 +3,7 @@ import Landing from './pages/Landing';
 import Sanctuary from './pages/Sanctuary';
 import Forge from './pages/Forge';
 import Torch from './pages/Torch';
+import Join from './pages/Join';
 import CircleSection from './pages/CircleSection';
 
 const routes = {
@@ -10,6 +11,7 @@ const routes = {
   '/sanctuary': Sanctuary,
   '/forge': Forge,
   '/torch': Torch,
+  '/join': Join,
 };
 
 function currentPath() {
