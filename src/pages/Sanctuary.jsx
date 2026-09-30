@@ -11,7 +11,6 @@ const links = [
   ['top-market','/section/marketplace'],
   ['top-library','/section/library'],
 
-  ['nav-home','/sanctuary'],
   ['nav-threads','/section/threads'],
   ['nav-hearths','/section/hearths'],
   ['nav-local','/section/local'],
