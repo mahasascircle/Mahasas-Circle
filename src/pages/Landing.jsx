@@ -23,54 +23,36 @@ export default function Landing({navigate}) {
   const beginJourney=()=>navigate('/join');
 
   return (
-    <main className={`landing-page landing-v2 ${returning?'returning':'first-arrival'}`}>
-      <div className="landing-v2-backdrop" aria-hidden="true"/>
+    <main className="landing-artwork-page">
+      <div className="landing-artwork-backdrop" aria-hidden="true"/>
       <div className="procedural-stars" aria-hidden="true"/>
-      <div className="portal-fog fog-one" aria-hidden="true"/>
-      <div className="portal-fog fog-two" aria-hidden="true"/>
 
-      <section className="landing-v2-scene" aria-label="Mahasa's Circle moonlit portal">
-        <div className="landing-v2-moon" aria-hidden="true">
-          <span className="moon-crater c1"/>
-          <span className="moon-crater c2"/>
-          <span className="moon-crater c3"/>
+      <section
+        className="landing-artwork-frame"
+        role="img"
+        aria-label="Mahasa's Circle moonlit sanctuary entrance with a living violet flame"
+      >
+        <div className="landing-artwork-flame-life" aria-hidden="true">
+          <span className="art-flame-glow g1"/>
+          <span className="art-flame-glow g2"/>
+          <span className="art-flame-glow g3"/>
+          <span className="art-flame-spark s1"/>
+          <span className="art-flame-spark s2"/>
+          <span className="art-flame-spark s3"/>
+          <span className="art-flame-spark s4"/>
         </div>
 
-        <div className="landing-v2-torch" aria-label="Living violet torch">
-          <div className="landing-v2-flame" aria-hidden="true">
-            <i className="v2-flame outer"/>
-            <i className="v2-flame violet"/>
-            <i className="v2-flame blue"/>
-            <i className="v2-flame gold"/>
-            <i className="v2-flame core"/>
-          </div>
-          <div className="landing-v2-cup"><span>☾</span></div>
-          <div className="landing-v2-stem"/>
-        </div>
+        <button
+          className="landing-artwork-hit enter"
+          onClick={enterCircle}
+          aria-label={returning ? 'Enter the Sanctuary' : 'Enter the Circle'}
+        />
 
-        <div className="landing-v2-copy">
-          <div className="landing-v2-mark" aria-hidden="true">☾ ✦ ☽</div>
-          <h1>Mahasa’s Circle</h1>
-          <p className="landing-v2-kicker">A safe space. Every path. One Circle.</p>
-          <h2>The fire is already burning.</h2>
-          <p className="landing-v2-intro">
-            A sacred space to learn, teach, gather, and walk your own path.
-            Every circle begins with a single step.
-          </p>
-
-          <button className="landing-v2-enter" onClick={enterCircle}>
-            <span aria-hidden="true">✦</span>
-            {returning ? 'Enter the Sanctuary' : 'Enter the Circle'}
-          </button>
-
-          <button className="landing-v2-begin" onClick={beginJourney}>
-            <span aria-hidden="true">❖</span>
-            <span>
-              <strong>Begin Your Journey</strong>
-              <small>Create your account and join the Circle</small>
-            </span>
-          </button>
-        </div>
+        <button
+          className="landing-artwork-hit journey"
+          onClick={beginJourney}
+          aria-label="Begin your journey and create an account"
+        />
       </section>
 
       <div className="landing-controls">
