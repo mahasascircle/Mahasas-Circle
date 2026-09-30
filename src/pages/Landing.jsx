@@ -30,10 +30,6 @@ export default function Landing({navigate}) {
       <div className="portal-fog fog-two" aria-hidden="true"/>
 
       <section className="landing-v2-scene" aria-label="Mahasa's Circle moonlit portal">
-        <button className="landing-v2-join" onClick={beginJourney}>
-          Join the Circle <span aria-hidden="true">☾</span>
-        </button>
-
         <div className="landing-v2-moon" aria-hidden="true">
           <span className="moon-crater c1"/>
           <span className="moon-crater c2"/>
