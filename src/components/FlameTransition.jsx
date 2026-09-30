@@ -36,20 +36,21 @@ export default function FlameTransition({
         <defs>
           <linearGradient id="realFireGradient" x1="0" y1="1" x2="0" y2="0">
             <stop offset="0%" stopColor="#ffffff" stopOpacity="1"/>
-            <stop offset="11%" stopColor="#fff2c8" stopOpacity=".98"/>
-            <stop offset="24%" stopColor="#ff9d5c" stopOpacity=".94"/>
-            <stop offset="40%" stopColor="#f173ff" stopOpacity=".95"/>
-            <stop offset="60%" stopColor="#9b54ff" stopOpacity=".9"/>
-            <stop offset="76%" stopColor="#5279ff" stopOpacity=".7"/>
-            <stop offset="100%" stopColor="#35134f" stopOpacity="0"/>
+            <stop offset="10%" stopColor="#fdf3ff" stopOpacity=".98"/>
+            <stop offset="22%" stopColor="#e9c7ff" stopOpacity=".94"/>
+            <stop offset="38%" stopColor="#cf8cff" stopOpacity=".95"/>
+            <stop offset="55%" stopColor="#a94dff" stopOpacity=".9"/>
+            <stop offset="72%" stopColor="#7a2fff" stopOpacity=".7"/>
+            <stop offset="100%" stopColor="#1c082c" stopOpacity="0"/>
           </linearGradient>
 
           <linearGradient id="realFireCore" x1="0" y1="1" x2="0" y2="0">
             <stop offset="0%" stopColor="#ffffff" stopOpacity="1"/>
-            <stop offset="20%" stopColor="#fff8de" stopOpacity=".95"/>
-            <stop offset="42%" stopColor="#e8c8ff" stopOpacity=".88"/>
-            <stop offset="70%" stopColor="#a96aff" stopOpacity=".5"/>
-            <stop offset="100%" stopColor="#4f2a9f" stopOpacity="0"/>
+            <stop offset="18%" stopColor="#fff8ff" stopOpacity=".98"/>
+            <stop offset="36%" stopColor="#f3d9ff" stopOpacity=".92"/>
+            <stop offset="56%" stopColor="#d59cff" stopOpacity=".78"/>
+            <stop offset="78%" stopColor="#9a54ff" stopOpacity=".42"/>
+            <stop offset="100%" stopColor="#5f2ea8" stopOpacity="0"/>
           </linearGradient>
 
           <filter id="realFireTurbulence" x="-35%" y="-35%" width="170%" height="170%">
@@ -139,9 +140,9 @@ export default function FlameTransition({
         </g>
 
         <g className="fire-haze-sheet" filter="url(#realFireSoft)" opacity=".54">
-          <ellipse cx="500" cy="710" rx="470" ry="330" fill="#8b39d5"/>
-          <ellipse cx="500" cy="760" rx="350" ry="250" fill="#ff7b4d" opacity=".42"/>
-          <ellipse cx="500" cy="655" rx="280" ry="220" fill="#5f7dff" opacity=".32"/>
+          <ellipse cx="500" cy="710" rx="470" ry="330" fill="#6e2dc7"/>
+          <ellipse cx="500" cy="760" rx="350" ry="250" fill="#b05cff" opacity=".42"/>
+          <ellipse cx="500" cy="655" rx="280" ry="220" fill="#8a63ff" opacity=".32"/>
         </g>
       </svg>
 
