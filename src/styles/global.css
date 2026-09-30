@@ -883,3 +883,117 @@ button,input,textarea{font:inherit}button{color:inherit}.eyebrow{text-transform:
   }
   .flame-walkthrough-real{background:#100619}
 }
+
+
+
+/* INITIATE SILHOUETTE — briefly walks into the cleansing flame */
+.flame-initiate{
+  position:absolute;
+  z-index:6;
+  left:50%;
+  bottom:-8%;
+  width:min(19vw,220px);
+  min-width:110px;
+  transform:translateX(-50%) translateY(13%) scale(1.12);
+  transform-origin:50% 100%;
+  opacity:0;
+  filter:
+    drop-shadow(0 0 10px rgba(197,118,255,.26))
+    drop-shadow(0 0 24px rgba(104,62,191,.18));
+  animation:initiateEnter 3.35s .28s cubic-bezier(.16,.7,.2,1) forwards;
+  pointer-events:none;
+}
+.flame-initiate svg{
+  display:block;
+  width:100%;
+  height:auto;
+  overflow:visible;
+}
+.initiate-hair{
+  transform-origin:50% 35%;
+  animation:initiateHair 1.15s ease-in-out infinite alternate;
+}
+.initiate-left-arm{
+  transform-origin:58px 170px;
+  animation:initiateArmLeft .86s ease-in-out infinite alternate;
+}
+.initiate-right-arm{
+  transform-origin:162px 170px;
+  animation:initiateArmRight .86s ease-in-out infinite alternate;
+}
+.initiate-body{
+  transform-origin:50% 60%;
+  animation:initiateBreath 1.2s ease-in-out infinite alternate;
+}
+.initiate-rim{
+  opacity:.72;
+  animation:initiateRim 1.1s ease-in-out infinite alternate;
+}
+@keyframes initiateEnter{
+  0%{
+    opacity:0;
+    transform:translateX(-50%) translateY(18%) scale(1.15);
+    filter:blur(2px) drop-shadow(0 0 5px rgba(182,108,255,.2));
+  }
+  14%{
+    opacity:.78;
+  }
+  45%{
+    opacity:.94;
+    transform:translateX(-50%) translateY(2%) scale(.98);
+    filter:blur(.6px) drop-shadow(0 0 18px rgba(214,149,255,.42));
+  }
+  74%{
+    opacity:.82;
+    transform:translateX(-50%) translateY(-13%) scale(.76);
+    filter:blur(1px) drop-shadow(0 0 28px rgba(174,98,255,.5));
+  }
+  100%{
+    opacity:0;
+    transform:translateX(-50%) translateY(-28%) scale(.48);
+    filter:blur(6px) brightness(1.35) drop-shadow(0 0 42px rgba(226,180,255,.62));
+  }
+}
+@keyframes initiateHair{
+  to{transform:translateX(2px) skewX(-1.8deg)}
+}
+@keyframes initiateArmLeft{
+  to{transform:rotate(2.2deg)}
+}
+@keyframes initiateArmRight{
+  to{transform:rotate(-2.2deg)}
+}
+@keyframes initiateBreath{
+  to{transform:scaleX(1.015)}
+}
+@keyframes initiateRim{
+  to{opacity:.94}
+}
+
+/* More irregular flame breakup for a less graphic / more organic burn */
+.real-fire-svg{
+  filter:saturate(1.06) contrast(1.09) blur(.12px);
+}
+.fire-sheet-left,
+.fire-sheet-right,
+.fire-sheet-bottom{
+  will-change:transform,opacity;
+}
+.fire-sheet-left{animation-duration:2.75s}
+.fire-sheet-right{animation-duration:2.62s}
+.fire-sheet-bottom{animation-duration:2.5s}
+.real-fire-heat{
+  backdrop-filter:blur(.25px);
+}
+@media(max-width:600px){
+  .flame-initiate{
+    width:min(31vw,180px);
+    bottom:-5%;
+  }
+}
+@media(prefers-reduced-motion:reduce){
+  .flame-initiate,.initiate-hair,.initiate-left-arm,.initiate-right-arm,.initiate-body,.initiate-rim{
+    animation:none!important;
+  }
+  .flame-initiate{opacity:.62;transform:translateX(-50%) scale(.72)}
+}
