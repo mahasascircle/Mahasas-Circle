@@ -14,7 +14,7 @@ button,input,textarea{font:inherit}button{color:inherit}.eyebrow{text-transform:
 @keyframes surge{from{transform:translateY(45%) scaleY(.3);opacity:.08}to{transform:translateY(-50%) scaleY(1.24);opacity:1}}@keyframes flicker{to{transform:translateX(7px) rotate(3deg) scaleY(1.08)}}@keyframes ember{from{opacity:0}20%{opacity:1}to{opacity:0;transform:translate(30px,-112vh) scale(1.3)}}@keyframes heat{from{opacity:0}to{opacity:.9;transform:translateY(-10%) scale(1.1)}}@keyframes lens{20%{opacity:1}to{transform:translate(-50%,-50%) scale(13)}}@keyframes copy{0%,100%{opacity:0}25%,65%{opacity:1}}
 .sanctuary-page,.forge-page,.torch-page{min-height:100svh;padding-bottom:90px;background:radial-gradient(circle at 75% 0,rgba(111,45,148,.16),transparent 30%),linear-gradient(180deg,#07030b,#030106)}
 .sanctuary-top{position:sticky;top:0;z-index:10;display:flex;align-items:center;gap:14px;padding:12px 18px;border-bottom:1px solid var(--line);background:rgba(5,2,8,.86);backdrop-filter:blur(17px)}.brand-small{display:flex;gap:8px;align-items:center;font:13px Georgia,serif;letter-spacing:.08em}.sanctuary-search{flex:1;max-width:540px;margin:auto;display:flex;align-items:center;gap:8px;padding:9px 12px;border:1px solid var(--line);border-radius:999px;background:rgba(255,255,255,.035)}.sanctuary-search input{border:0;outline:0;background:transparent;color:#fff;width:100%}.round-button{width:40px;height:40px;border-radius:50%;border:1px solid var(--line);background:rgba(255,255,255,.04);display:grid;place-items:center}
-.sanctuary-hero{max-width:1120px;margin:22px auto;padding:28px;min-height:290px;border:1px solid var(--line);border-radius:22px;display:grid;grid-template-columns:1fr auto;align-items:center;background:linear-gradient(100deg,rgba(15,8,22,.96),rgba(14,7,20,.70)),url('/assets/approved-dashboard.png') center/cover;box-shadow:0 25px 80px rgba(0,0,0,.42)}.hero-copy h1{font:400 clamp(38px,7vw,64px) Georgia,serif;margin:5px 0 8px}.hero-copy>p:last-of-type{color:#d1c6d6}.hero-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:9px;margin-top:22px}.hero-stats div{padding:13px;border:1px solid var(--line);border-radius:12px;background:rgba(4,2,7,.64)}.hero-stats strong{display:block;font:26px Georgia,serif}.hero-stats span{font-size:10px;color:var(--muted)}.living-moon{width:130px;height:130px;border-radius:50%;display:grid;place-items:center;background:radial-gradient(circle,#d8d1dc,#6e6875 55%,#17121b 74%);box-shadow:0 0 48px rgba(217,206,225,.22);animation:breathe 5s ease-in-out infinite}
+.sanctuary-hero{max-width:1120px;margin:22px auto;padding:28px;min-height:290px;border:1px solid var(--line);border-radius:22px;display:grid;grid-template-columns:1fr auto;align-items:center;background:linear-gradient(100deg,rgba(15,8,22,.96),rgba(14,7,20,.70)),url('/assets/sanctuary-cinematic.png') center/cover;box-shadow:0 25px 80px rgba(0,0,0,.42)}.hero-copy h1{font:400 clamp(38px,7vw,64px) Georgia,serif;margin:5px 0 8px}.hero-copy>p:last-of-type{color:#d1c6d6}.hero-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:9px;margin-top:22px}.hero-stats div{padding:13px;border:1px solid var(--line);border-radius:12px;background:rgba(4,2,7,.64)}.hero-stats strong{display:block;font:26px Georgia,serif}.hero-stats span{font-size:10px;color:var(--muted)}.living-moon{width:130px;height:130px;border-radius:50%;display:grid;place-items:center;background:radial-gradient(circle,#d8d1dc,#6e6875 55%,#17121b 74%);box-shadow:0 0 48px rgba(217,206,225,.22);animation:breathe 5s ease-in-out infinite}
 .section-block{max-width:1120px;margin:auto;padding:0 18px}.section-heading{display:flex;justify-content:space-between;align-items:end;margin:18px 0 12px}.section-heading h2{font:400 24px Georgia,serif;margin:0}.section-heading span{color:var(--muted);font-size:12px}.sanctuary-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:11px}.sanctuary-card{text-align:left;min-height:180px;padding:17px;border:1px solid var(--line);border-radius:15px;background:linear-gradient(145deg,#120a1a,#08040d);cursor:pointer}.sanctuary-card:hover{border-color:#ac6ad4;transform:translateY(-2px)}.sanctuary-card h3{font:400 19px Georgia,serif;margin:13px 0 7px}.sanctuary-card p{color:#c9becf;font-size:12px;line-height:1.5}.sanctuary-card>span{color:#c993ec;font-size:12px}.living-row{max-width:1120px;margin:16px auto;display:grid;grid-template-columns:1fr 1.4fr 1fr;gap:11px;padding:0 18px}.living-row article{display:flex;gap:13px;align-items:center;padding:15px;border:1px solid var(--line);border-radius:15px;background:#100817}.living-row span{display:block;color:#c993ec;font-size:10px;text-transform:uppercase;letter-spacing:.09em}.living-row strong{display:block;margin-top:4px;font:14px Georgia,serif}
 .bottom-nav{position:fixed;left:0;right:0;bottom:0;z-index:30;display:grid;grid-template-columns:repeat(5,1fr);padding:8px 10px max(8px,env(safe-area-inset-bottom));border-top:1px solid var(--line);background:rgba(5,2,8,.94);backdrop-filter:blur(18px)}.bottom-nav button{display:grid;justify-items:center;gap:4px;border:0;background:transparent;color:#9f93a8;font-size:10px}.bottom-nav button.active{color:#d9a5f4;text-shadow:0 0 12px #a95cda}
 .simple-header{position:sticky;top:0;z-index:20;display:grid;grid-template-columns:auto 1fr auto;align-items:center;padding:12px 16px;border-bottom:1px solid var(--line);background:rgba(5,2,8,.88);backdrop-filter:blur(18px)}.simple-header button{width:42px;height:42px;border-radius:50%;border:1px solid var(--line);background:rgba(255,255,255,.035)}.simple-header div{text-align:center}.simple-header span{display:block;color:#c993ec;font-size:10px;text-transform:uppercase;letter-spacing:.17em}.simple-header strong{display:block;font:21px Georgia,serif;margin-top:2px}
@@ -39,7 +39,7 @@ button,input,textarea{font:inherit}button{color:inherit}.eyebrow{text-transform:
 /* v7.1.1 — APPROVED PAGE 2 RESTORED */
 .approved-sanctuary{min-height:100svh;background:radial-gradient(circle at 50% 12%,rgba(97,38,130,.16),transparent 30%),#020105;overflow-x:hidden}
 .approved-dashboard-wrap{min-height:100svh;display:grid;place-items:start center}
-.approved-dashboard-art{position:relative;width:min(100vw,1024px);aspect-ratio:1024/1536;background:url('/assets/approved-dashboard.png') top center/contain no-repeat;opacity:0;transform:scale(1.012);filter:brightness(.35) saturate(.78)}
+.approved-dashboard-art{position:relative;width:min(100vw,1024px);aspect-ratio:1024/1536;background:url('/assets/sanctuary-cinematic.png') top center/contain no-repeat;opacity:0;transform:scale(1.012);filter:brightness(.35) saturate(.78)}
 .approved-sanctuary.revealed .approved-dashboard-art{animation:approvedReveal 1.45s cubic-bezier(.2,.72,.2,1) forwards}
 .approved-hotspot{position:absolute;z-index:5;display:block;border:0;padding:0;margin:0;border-radius:10px;background:transparent;appearance:none;-webkit-appearance:none;cursor:pointer;-webkit-tap-highlight-color:transparent}
 .approved-hotspot:focus-visible{outline:3px solid #fff;outline-offset:2px;box-shadow:0 0 24px rgba(189,120,239,.7)}
@@ -63,7 +63,7 @@ button,input,textarea{font:inherit}button{color:inherit}.eyebrow{text-transform:
 @keyframes approvedTorchFlicker{from{opacity:.4;transform:scale(.94) rotate(-1deg)}to{opacity:.8;transform:scale(1.08) rotate(1.4deg)}}
 @keyframes approvedLakeMove{from{background-position:0 0}to{background-position:120px 8px}}
 @keyframes approvedEmber{0%{opacity:0;transform:translate(0,12px)}20%{opacity:.75}75%{opacity:.4}100%{opacity:0;transform:translate(20px,-44px)}}
-@media(prefers-reduced-motion:reduce){.approved-dashboard-art,.moon-glow,.torch-glow,.lake-shimmer,.ember{animation:none!important}.approved-sanctuary.revealed .approved-dashboard-art{opacity:1;filter:none;transform:none}}
+2@media(prefers-reduced-motion:reduce){.approved-dashboard-art,.moon-glow,.torch-glow,.lake-shimmer,.ember{animation:none!important}.approved-sanctuary.revealed .approved-dashboard-art{opacity:1;filter:none;transform:none}}
 
 /* Sanctuary left-panel hotspot alignment correction */
 .nav-home{top:17.3%}
@@ -77,3 +77,34 @@ button,input,textarea{font:inherit}button{color:inherit}.eyebrow{text-transform:
 .nav-bookmarks{top:43.9%}
 .nav-messages{top:47.1%}
 .nav-settings{top:50.3%}
+
+/* Precise upper-left nav fix */\.nav-home{top:14.1%;transform:none}
+.nav-threads{top:17.3%;transform:none}
+.nav-hearths{top:20.5%;transform:none}/* FINAL SANCTUARY LEFT NAV — single source of truth */
+/* FINAL SANCTUARY LEFT NAV — aligned to artwork */
+.nav-home       { top:20.1% !important; height:3.1% !important; transform:none !important; }
+.nav-threads    { top:23.8% !important; height:3.1% !important; transform:none !important; }
+.nav-hearths    { top:27.2% !important; height:3.1% !important; transform:none !important; }
+.nav-local      { top:30.8% !important; height:3.1% !important; transform:none !important; }
+.nav-gatherings { top:34.4% !important; height:3.1% !important; transform:none !important; }
+.nav-market     { top:38.3% !important; height:3.1% !important; transform:none !important; }
+.nav-library    { top:42.3% !important; height:3.1% !important; transform:none !important; }
+
+.nav-profile    { top:46.2% !important; height:3.1% !important; transform:none !important; }
+.nav-messages   { top:53.1% !important; height:3.1% !important; transform:none !important; }
+.nav-bookmarks  { top:57.2% !important; height:3.1% !important; transform:none !important; }
+.nav-settings   { top:61.1% !important; height:3.1% !important; transform:none !important; }
+
+/* TEMP DEBUG — SHOW ALL CLICKABLE HOTSPOTS */
+.approved-hotspot {
+  background: rgba(255, 0, 255, 0.28) !important;
+  outline: 3px solid #ff00ff !important;
+}/* Disable oversized Torch hotspot */
+.nav-flame {
+  display: none !important;
+}
+
+
+
+
+
