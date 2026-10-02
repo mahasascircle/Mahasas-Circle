@@ -5,6 +5,7 @@ import Forge from './pages/Forge';
 import Torch from './pages/Torch';
 import Join from './pages/Join';
 import CircleSection from './pages/CircleSection';
+import Demo from './pages/Demo';
 
 const routes = {
   '/': Landing,
@@ -12,6 +13,7 @@ const routes = {
   '/forge': Forge,
   '/torch': Torch,
   '/join': Join,
+  '/demo': Demo,
 };
 
 function currentPath() {
