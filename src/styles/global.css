@@ -997,3 +997,210 @@ button,input,textarea{font:inherit}button{color:inherit}.eyebrow{text-transform:
   }
   .flame-initiate{opacity:.62;transform:translateX(-50%) scale(.72)}
 }
+
+
+/* EVENT DEMO — self-running Mahasa's Circle showcase */
+.event-demo{
+  position:fixed;
+  inset:0;
+  z-index:20000;
+  display:grid;
+  place-items:center;
+  overflow:hidden;
+  background:#020105;
+  color:#fff;
+}
+.event-demo-backdrop{
+  position:absolute;
+  inset:-8%;
+  background:
+    linear-gradient(rgba(2,1,5,.44),rgba(2,1,5,.76)),
+    url('/assets/landing-sanctuary.png') center/cover no-repeat;
+  filter:blur(28px) brightness(.48) saturate(1.08);
+  transform:scale(1.12);
+}
+.event-demo-stage{
+  position:relative;
+  width:min(100vw,calc(100svh * 1.777777));
+  aspect-ratio:16/9;
+  overflow:hidden;
+  background:#050209;
+  box-shadow:0 30px 100px rgba(0,0,0,.68);
+  animation:eventDemoReveal .85s ease both;
+}
+.event-demo-art{
+  position:absolute;
+  inset:0;
+  background-position:center;
+  background-repeat:no-repeat;
+  background-size:cover;
+  transform:scale(1.02);
+  animation:eventDemoDrift 8s ease-out both;
+}
+.event-demo-landing .event-demo-art{
+  background-image:url('/assets/landing-sanctuary.png');
+}
+.event-demo-sanctuary .event-demo-art{
+  background-image:url('/assets/sanctuary-cinematic.png');
+}
+.event-demo-shade{
+  position:absolute;
+  inset:0;
+  background:
+    linear-gradient(90deg,rgba(2,1,5,.88) 0%,rgba(2,1,5,.72) 27%,rgba(2,1,5,.18) 58%,rgba(2,1,5,.18) 100%),
+    linear-gradient(0deg,rgba(2,1,5,.72),transparent 48%);
+}
+.event-demo-copy{
+  position:absolute;
+  z-index:5;
+  left:6.5%;
+  top:50%;
+  width:min(570px,46%);
+  transform:translateY(-50%);
+  animation:eventDemoCopy .95s .12s ease both;
+}
+.event-demo-eyebrow{
+  margin-bottom:14px;
+  color:#e8c8ff;
+  font-size:clamp(10px,1vw,16px);
+  font-weight:700;
+  letter-spacing:.19em;
+  text-transform:uppercase;
+}
+.event-demo-copy h1{
+  margin:0;
+  max-width:720px;
+  color:#fff9ff;
+  font:500 clamp(34px,4.35vw,76px)/.98 Georgia,serif;
+  letter-spacing:-.025em;
+  text-shadow:0 8px 34px rgba(0,0,0,.52),0 0 26px rgba(165,78,219,.16);
+}
+.event-demo-copy p{
+  max-width:620px;
+  margin:22px 0 0;
+  color:#ded3e3;
+  font-size:clamp(15px,1.55vw,25px);
+  line-height:1.48;
+  text-shadow:0 4px 16px rgba(0,0,0,.8);
+}
+.event-demo-badges{
+  display:flex;
+  flex-wrap:wrap;
+  gap:9px;
+  margin-top:24px;
+}
+.event-demo-badges span{
+  padding:9px 13px;
+  border:1px solid rgba(231,196,255,.34);
+  border-radius:999px;
+  background:rgba(20,7,28,.58);
+  color:#f1e6f4;
+  font-size:clamp(10px,.95vw,14px);
+  letter-spacing:.025em;
+  backdrop-filter:blur(8px);
+}
+.event-demo-quote{
+  margin-top:27px;
+  color:#f2d8a6;
+  font:italic 500 clamp(18px,1.85vw,31px)/1.25 Georgia,serif;
+  letter-spacing:.025em;
+}
+.event-demo-brand{
+  position:absolute;
+  z-index:6;
+  left:3.1%;
+  top:3.5%;
+  color:rgba(255,247,255,.82);
+  font-size:clamp(10px,.85vw,14px);
+  font-weight:700;
+  letter-spacing:.22em;
+}
+.event-demo-count{
+  position:absolute;
+  z-index:6;
+  right:3.1%;
+  top:3.5%;
+  color:rgba(235,217,240,.68);
+  font-size:clamp(10px,.85vw,14px);
+  letter-spacing:.16em;
+}
+.event-demo-progress{
+  position:fixed;
+  z-index:20005;
+  left:0;
+  right:0;
+  bottom:0;
+  height:3px;
+  background:rgba(255,255,255,.08);
+}
+.event-demo-progress span{
+  display:block;
+  height:100%;
+  background:linear-gradient(90deg,#8c42d5,#d8a7ff,#f0c98f);
+  transition:width .5s ease;
+  box-shadow:0 0 14px rgba(194,118,255,.7);
+}
+.event-demo-controls{
+  position:fixed;
+  z-index:20010;
+  right:14px;
+  bottom:14px;
+  display:flex;
+  gap:7px;
+  opacity:.12;
+  transition:opacity .2s ease;
+}
+.event-demo-controls:hover,
+.event-demo-controls:focus-within{opacity:1}
+.event-demo-controls button{
+  border:1px solid rgba(255,255,255,.16);
+  border-radius:999px;
+  padding:8px 11px;
+  background:rgba(7,3,10,.78);
+  color:#eee5f0;
+  font-size:11px;
+  cursor:pointer;
+  backdrop-filter:blur(10px);
+}
+.event-demo-focus{
+  position:absolute;
+  z-index:4;
+  border:1px solid rgba(234,203,255,.86);
+  border-radius:26px;
+  box-shadow:
+    0 0 0 9999px rgba(2,1,5,.22),
+    0 0 44px rgba(194,103,255,.62),
+    inset 0 0 30px rgba(233,199,255,.08);
+  animation:eventDemoPulse 1.5s ease-in-out infinite alternate;
+}
+.focus-connect{left:29%;top:44%;width:37%;height:29%}
+.focus-local{left:68%;top:43%;width:29%;height:31%}
+.focus-practice{left:20%;top:80%;width:52%;height:14%}
+.focus-makers{left:72%;top:80%;width:25%;height:14%}
+
+@keyframes eventDemoReveal{
+  from{opacity:0;filter:blur(5px)}
+  to{opacity:1;filter:none}
+}
+@keyframes eventDemoDrift{
+  from{transform:scale(1.02)}
+  to{transform:scale(1.075)}
+}
+@keyframes eventDemoCopy{
+  from{opacity:0;transform:translateY(calc(-50% + 22px));filter:blur(5px)}
+  to{opacity:1;transform:translateY(-50%);filter:none}
+}
+@keyframes eventDemoPulse{
+  to{box-shadow:0 0 0 9999px rgba(2,1,5,.18),0 0 64px rgba(202,122,255,.78),inset 0 0 38px rgba(255,230,255,.1)}
+}
+@media(max-width:760px){
+  .event-demo-stage{width:100vw;height:100svh;aspect-ratio:auto}
+  .event-demo-copy{left:7%;width:86%;top:58%}
+  .event-demo-shade{background:linear-gradient(0deg,rgba(2,1,5,.9) 0%,rgba(2,1,5,.55) 58%,rgba(2,1,5,.22) 100%)}
+  .event-demo-copy h1{font-size:clamp(36px,11vw,62px)}
+  .event-demo-copy p{font-size:clamp(15px,4vw,20px)}
+  .event-demo-controls{opacity:.22}
+}
+@media(prefers-reduced-motion:reduce){
+  .event-demo-stage,.event-demo-art,.event-demo-copy,.event-demo-focus{animation:none!important}
+}
