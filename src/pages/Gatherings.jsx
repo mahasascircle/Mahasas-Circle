@@ -37,6 +37,104 @@ const inspiration = [
   }
 ];
 
+/* Scenic illustrations are drawn as SVG so no remote image host is required.
+   Each is intentionally illustrative; example gatherings are not live events. */
+function GatheringScene({ type }) {
+  const scene = type === 'idea-moon' ? 'journal' :
+    type === 'idea-makers' ? 'market' :
+    type === 'idea-hearth' ? 'hearth' : 'crossroads';
+  return (
+    <svg className={'gather-illustration gather-scene-' + scene}
+      viewBox="0 0 680 300" preserveAspectRatio="xMidYMid slice"
+      role="img" aria-label={
+        scene === 'journal' ? 'Moonlit journal and ritual candles' :
+        scene === 'market' ? 'Artisan market stalls beneath a violet moon' :
+        scene === 'hearth' ? 'A warm fire surrounded by a quiet circle' :
+        'Ancient stone crossroads under moonlight'
+      }>
+      <g className="gather-scene-stars" fill="#f2d8ff">
+        <circle cx="48" cy="41" r="1.6" /><circle cx="112" cy="85" r="1.2" />
+        <circle cx="190" cy="34" r="1.3" /><circle cx="260" cy="64" r="1.6" />
+        <circle cx="398" cy="29" r="1.3" /><circle cx="488" cy="80" r="1.7" />
+        <circle cx="552" cy="26" r="1.3" /><circle cx="639" cy="56" r="1.6" />
+      </g>
+      <circle className="gather-scene-moon" cx={scene === 'market' ? 545 : scene === 'hearth' ? 342 : scene === 'journal' ? 490 : 340}
+        cy={scene === 'journal' ? 84 : 71} r={scene === 'market' ? 31 : 41}
+        fill="#efd4ff" opacity=".9"/>
+      <circle cx={scene === 'market' ? 545 : scene === 'hearth' ? 342 : scene === 'journal' ? 490 : 340}
+        cy={scene === 'journal' ? 84 : 71} r="57" fill="none" stroke="#d4a3e8" strokeOpacity=".17" strokeWidth="20"/>
+      {scene === 'crossroads' && <>
+        <path d="M0 186 L70 151 L136 184 L220 120 L296 191 L375 158 L465 124 L532 175 L608 135 L680 180 V300 H0Z" fill="#332043"/>
+        <path d="M0 226 L112 172 L204 231 L306 160 L391 226 L493 170 L606 231 L680 188 V300 H0Z" fill="#1b1029"/>
+        <path d="M315 300 L328 195 L350 195 L368 300Z" fill="#745178" opacity=".7"/>
+        <path d="M328 224 L231 300 H278 L340 240 L405 300 H452 L355 222Z" fill="#9e7a94" opacity=".5"/>
+        <path d="M140 265 L149 144 Q153 123 167 123 L194 123 Q208 123 211 144 L220 265" fill="none" stroke="#77618b" strokeWidth="16"/>
+        <path d="M459 265 L468 144 Q471 123 484 123 L511 123 Q525 123 528 144 L537 265" fill="none" stroke="#77618b" strokeWidth="16"/>
+        <rect x="156" y="174" width="40" height="84" fill="#261729" opacity=".8"/>
+        <rect x="476" y="174" width="43" height="84" fill="#261729" opacity=".8"/>
+        {[165,506].map((x,i)=><g key={i}>
+          <circle cx={x} cy="200" r="22" fill="#efab58" opacity=".18"/>
+          <path d={'M'+(x-5)+' 207 Q'+(x-12)+' 190 '+x+' 177 Q'+(x+11)+' 188 '+(x+5)+' 207Z'} fill="#f9c27f"/>
+          <rect x={x-7} y="205" width="14" height="32" rx="3" fill="#f0d5ae"/>
+        </g>)}
+      </>}
+      {scene === 'journal' && <>
+        <path d="M0 235 L65 160 L119 211 L205 139 L294 220 L398 161 L527 226 L680 156 V300 H0Z" fill="#261934" opacity=".7"/>
+        <path d="M400 250 V80 Q400 26 483 26 Q568 26 568 80 V250" fill="none" stroke="#77658b" strokeWidth="20"/>
+        <path d="M482 42 V235 M414 133 H553" stroke="#57416a" strokeWidth="9"/>
+        <rect x="0" y="223" width="680" height="80" fill="#27172a"/>
+        <rect x="0" y="222" width="680" height="12" fill="#896281"/>
+        <path d="M177 234 Q233 198 308 222 L339 238 L365 219 Q436 197 501 233 L498 283 Q418 254 340 284 Q262 258 180 283Z"
+          fill="#e9d4b7" stroke="#b69c9e" strokeWidth="3"/>
+        <path d="M340 238 V281 M198 242 L314 254 M198 254 L308 268 M371 256 L473 242 M373 271 L474 256"
+          stroke="#9f87a0" strokeWidth="2.5" opacity=".6"/>
+        <path d="M129 225 L165 183 L152 224Z" fill="#f1c89b"/>
+        <path d="M139 219 Q132 195 154 179 Q171 199 150 218Z" fill="#f5ab65"/>
+        <rect x="126" y="221" width="35" height="48" rx="4" fill="#ddd2cc"/>
+        <path d="M527 232 L550 197 L570 227Z" fill="#f5bc80"/>
+        <rect x="530" y="226" width="33" height="47" rx="5" fill="#d7b3bd"/>
+        <path d="M560 235 L595 159" stroke="#b2b6e0" strokeWidth="5"/>
+      </>}
+      {scene === 'market' && <>
+        <path d="M0 196 L84 151 L166 209 L252 147 L351 211 L476 144 L580 214 L680 166 V300 H0Z" fill="#30203e"/>
+        <rect x="0" y="250" width="680" height="50" fill="#1c1424"/>
+        {[28,236,444].map((x,i)=><g key={i}>
+          <path d={'M'+x+' 171 L'+(x+90)+' 118 L'+(x+180)+' 171Z'} fill={i===1?'#866176':'#705176'} stroke="#c39d86" strokeWidth="3"/>
+          <path d={'M'+x+' 171 H'+(x+180)+' L'+(x+170)+' 196 H'+(x+10)+'Z'} fill="#aa7493"/>
+          {[0,1,2,3].map(n=><path key={n} d={'M'+(x+10+n*40)+' 171 v24'} stroke="#f1b898" strokeWidth="12" opacity=".6"/>)}
+          <rect x={x+15} y="194" width="8" height="71" fill="#95768a"/>
+          <rect x={x+157} y="194" width="8" height="71" fill="#95768a"/>
+          <rect x={x+22} y="238" width="136" height="12" rx="3" fill="#b18a82"/>
+          <rect x={x+35} y="222" width="23" height="17" rx="5" fill="#e9b878"/>
+          <rect x={x+75} y="217" width="20" height="21" rx="5" fill="#9776c0"/>
+          <rect x={x+112} y="225" width="25" height="14" rx="6" fill="#e0bdb0"/>
+        </g>)}
+        <path d="M0 100 Q175 140 340 107 Q515 70 680 116" fill="none" stroke="#d9a478" strokeWidth="2"/>
+        {[75,160,244,340,428,530,624].map((x,i)=><g key={i}>
+          <circle cx={x} cy={i%2?120:115} r="6" fill="#ffe5aa" opacity=".95"/>
+          <circle cx={x} cy={i%2?120:115} r="15" fill="#ffc883" opacity=".12"/>
+        </g>)}
+      </>}
+      {scene === 'hearth' && <>
+        <path d="M0 205 L70 167 L145 193 L232 135 L345 205 L451 143 L535 183 L622 154 L680 203 V300 H0Z" fill="#34223f"/>
+        <path d="M0 255 Q110 200 218 236 Q360 189 475 225 Q610 188 680 226 V300 H0Z" fill="#1b1123"/>
+        <ellipse cx="341" cy="265" rx="178" ry="33" fill="#d18c68" opacity=".12"/>
+        <path d="M287 270 L391 243 M391 272 L287 245" stroke="#7c5243" strokeWidth="13" strokeLinecap="round"/>
+        <path d="M318 246 Q281 202 324 170 Q333 194 345 198 Q363 173 361 155 Q420 211 369 248Z" fill="#f2a76d"/>
+        <path d="M332 245 Q317 217 343 201 Q351 218 363 209 Q377 233 358 245Z" fill="#ffe5ac"/>
+        {[160,520].map((x,i)=><g key={i} opacity=".95">
+          <ellipse cx={x} cy="258" rx="34" ry="15" fill="#15101b"/>
+          <circle cx={x} cy="203" r="17" fill="#261626"/>
+          <path d={'M'+(x-24)+' 264 Q'+(x-35)+' 217 '+x+' 221 Q'+(x+39)+' 215 '+(x+28)+' 264Z'} fill="#322034"/>
+          <path d={'M'+(x-30)+' 262 L'+(x-54)+' 278 M'+(x+30)+' 262 L'+(x+55)+' 280'} stroke="#322034" strokeWidth="14" strokeLinecap="round"/>
+        </g>)}
+        <circle cx="339" cy="225" r="95" fill="#f6a964" opacity=".045"/>
+      </>}
+      <path d="M0 287 Q164 263 330 287 Q508 260 680 283 V300 H0Z" fill="#090711" opacity=".8"/>
+    </svg>
+  );
+}
+
 const emptyForm = {
   title: '', category: 'Community', format: 'In person',
   date: '', time: '', place: '', description: ''
@@ -244,7 +342,7 @@ export default function Gatherings({ navigate }) {
             return (
               <article className={'gather-card gather-tone-' + (item.tone || 'violet')} key={item.id}>
                 <div className="gather-card-visual">
-                  <span className="gather-card-symbol" aria-hidden="true">{item.symbol || '✦'}</span>
+                  <GatheringScene type={item.id} />
                   <span className="gather-card-ribbon">{item.isDraft ? 'YOUR PRIVATE DRAFT' : 'EXAMPLE • NOT LIVE'}</span>
                 </div>
                 <div className="gather-card-body">
