@@ -89,3 +89,106 @@
 @media(max-width:750px) { .gather-brand { display:none; }.gather-topbar { gap:8px; }.gather-hero { min-height:540px; }.gather-arch { width:105vw; }.gather-content { padding-top:40px; }.gather-grid { grid-template-columns:1fr; }.gather-intro { align-items:start; }.gather-last-call { flex-wrap:wrap; }.gather-last-call .gather-primary { width:100%; } }
 @media(max-width:520px) { .gather-top-action { padding:10px 11px; font-size:12px; }.gather-hero-content { padding:65px 17px 90px; }.gather-hero h1 { font-size:64px; }.gather-description { font-size:13px; }.gather-hero-footer { letter-spacing:.08em; }.gather-intro { flex-direction:column; }.gather-stats { width:100%; }.gather-filter-bar { flex-wrap:wrap; }.gather-search,.gather-select-label { width:100%; max-width:100%; }.gather-card-body { padding:19px; }.gather-form-row { grid-template-columns:1fr; }.gather-modal { max-height:92vh; padding:18px; }.gather-modal-backdrop { padding:11px; } }
 @media(prefers-reduced-motion:reduce) { .gather-card,.gather-return,.gather-top-action { transition:none; } }
+
+
+/* Gatherings cinematic polish v2 — scoped to this page; protected masters unchanged */
+.gather-moon {
+  top: 8%;
+  left: 79%;
+  width: min(16vw, 106px);
+  opacity: .78;
+  background: radial-gradient(circle at 28% 24%, #fff9f6, #ead7f7 58%, #a987c3);
+  box-shadow: 0 0 30px 11px #b984e34a, 0 0 88px #cda6e143;
+}
+.gather-hero-content {
+  max-width: 790px;
+  background: radial-gradient(ellipse at center, rgba(10, 5, 20, .57), rgba(10, 5, 20, .2) 62%, transparent 82%);
+}
+.gather-hero h1 {
+  color: #fff7ff;
+  text-shadow: 0 2px 16px #09040f, 0 0 35px #d89eec33;
+}
+.gather-card-visual {
+  height: clamp(195px, 22vw, 245px);
+  background: radial-gradient(ellipse at 50% 55%, #614071, #0c0917 78%);
+  isolation: isolate;
+}
+.gather-card-visual::after {
+  content: "";
+  position: absolute;
+  z-index: 1;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(to top, #0907115c, transparent 34%), linear-gradient(90deg, #0d071621, transparent 35%, transparent 65%, #0d071621);
+}
+.gather-illustration {
+  display: block;
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  transform: scale(1.015);
+  transition: transform .7s ease;
+}
+.gather-card:hover .gather-illustration { transform: scale(1.065); }
+.gather-scene-stars { opacity: .77; }
+.gather-scene-moon {
+  filter: drop-shadow(0 0 19px #c89ce5) drop-shadow(0 0 37px #b583ce6c);
+}
+.gather-scene-crossroads { background: radial-gradient(ellipse at 51% 32%, #765087 0, #2c1d43 46%, #0d0817 100%); }
+.gather-scene-journal { background: radial-gradient(ellipse at 73% 32%, #686c9c, #292345 56%, #100b1d 100%); }
+.gather-scene-market { background: radial-gradient(ellipse at 60% 40%, #8a5775, #3c2539 56%, #120a17); }
+.gather-scene-hearth { background: radial-gradient(ellipse at 51% 65%, #7c4b5b, #3b223f 52%, #150c1e); }
+.gather-card-ribbon {
+  z-index: 3;
+  color: #fff3fb;
+  background: #120b1bcf;
+  border-color: #eed2f09c;
+  box-shadow: 0 4px 16px #0006;
+}
+.gather-card { box-shadow: 0 14px 35px #0004; }
+.gather-card h3 { color: #fff8fb; }
+.gather-last-call {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  border-color: #c397d67a;
+  background: linear-gradient(105deg, #31133f, #21142f 60%, #120a19);
+  box-shadow: inset 0 0 40px #d39ef30c, 0 20px 55px #0004;
+}
+.gather-last-call::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  opacity: .57;
+  pointer-events: none;
+  background: radial-gradient(circle at 86% 24%, #e5c5f28a 0 4px, transparent 5px),
+    radial-gradient(circle at 92% 74%, #e5c5f28a 0 2px, transparent 3px),
+    radial-gradient(circle at 71% 16%, #e5c5f28a 0 2px, transparent 3px),
+    radial-gradient(circle at 20% 72%, #e5c5f28a 0 2px, transparent 3px),
+    radial-gradient(circle at 85% 60%, #c18bdb40, transparent 30%);
+}
+.gather-last-call > span {
+  display: grid;
+  place-items: center;
+  width: 84px;
+  height: 84px;
+  flex: none;
+  border-radius: 50%;
+  border: 1px solid #e4b5dd8a;
+  background: radial-gradient(circle, #a565ac40, #24112f);
+  font-size: 43px;
+  box-shadow: 0 0 25px #c18cde2d;
+}
+@media (max-width: 750px) {
+  .gather-moon { top: 9%; left: 76%; width: min(18vw, 85px); }
+  .gather-card-visual { height: 215px; }
+}
+@media (max-width: 520px) {
+  .gather-moon { top: 8%; left: 76%; width: 65px; }
+  .gather-last-call > span { width: 60px; height: 60px; font-size: 34px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .gather-illustration { transition: none; }
+}
