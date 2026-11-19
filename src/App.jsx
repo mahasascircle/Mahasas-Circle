@@ -7,6 +7,7 @@ import Join from './pages/Join';
 import CircleSection from './pages/CircleSection';
 import Demo from './pages/Demo';
 import Gatherings from './pages/Gatherings';
+import LocalCircle from './pages/LocalCircle';
 
 const routes = {
   '/': Landing,
@@ -16,6 +17,8 @@ const routes = {
   '/join': Join,
   '/demo': Demo,
   '/section/gatherings': Gatherings,
+  '/section/local': LocalCircle,
+  '/section/map': LocalCircle,
 };
 
 function currentPath() {
