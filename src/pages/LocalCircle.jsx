@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useState } from 'react';
-import { ArrowLeft, ArrowRight, Bookmark, Check, Compass, Flame, MapPin, Plus, Search, ShieldCheck, Sparkles, Trash2, Users, X } from 'lucide-react';
+import { ArrowLeft, ArrowRight, Bookmark, Check, Compass, Flame, MapPin, Moon, Plus, Search, ShieldCheck, Sparkles, Trash2, Users, X } from 'lucide-react';
 import './LocalCircle.css';
 
 const TYPES = ['All', 'Circles', 'Artisans', 'Gatherings', 'Spaces'];
@@ -38,6 +38,7 @@ export default function LocalCircle({navigate}) {
   const [privacyOpen,setPrivacyOpen]=useState(false);
   const [form,setForm]=useState(EMPTY);
   const [editing,setEditing]=useState(null);
+  const [draftError,setDraftError]=useState('');
   const [notice,setNotice]=useState('');
 
   useEffect(()=>{
@@ -57,17 +58,20 @@ export default function LocalCircle({navigate}) {
   },[category,query,drafts]);
 
   function setField(field,value){setForm(f=>({...f,[field]:value}));}
-  function beginDraft(){setEditing(null);setForm({...EMPTY,area});setOpen(true);}
-  function editDraft(d){setEditing(d.id);setForm({title:d.title,category:d.category,area:d.area,description:d.description});setOpen(true);}
+  function beginDraft(){setDraftError('');setEditing(null);setForm({...EMPTY,area});setOpen(true);}
+  function editDraft(d){setDraftError('');setEditing(d.id);setForm({title:d.title,category:d.category,area:d.area,description:d.description});setOpen(true);}
   function saveDraft(e){
     e.preventDefault();
     const d={
       id:editing||'lc-'+Date.now()+'-'+Math.random().toString(36).slice(2,6),
       title:form.title.trim(),category:form.category,area:form.area.trim(),description:form.description.trim()
     };
-    if(!d.title||!d.area)return;
+    if(!d.title||!d.area){
+      setDraftError('Enter a listing name and a city or general region.');
+      return;
+    }
     const next=editing?drafts.map(old=>old.id===editing?d:old):[d,...drafts];
-    if(!persist(DRAFTS_KEY,next)){setNotice('This browser could not save the draft.');return;}
+    if(!persist(DRAFTS_KEY,next)){setDraftError('This browser could not save the draft. Your changes are still in this form.');return;}
     setDrafts(next);setOpen(false);setNotice('Private draft saved on this device. Nothing was published.');
     setQuery('');setCategory('All');
   }
@@ -191,6 +195,7 @@ export default function LocalCircle({navigate}) {
           <label>Category<select value={form.category} onChange={e=>setField('category',e.target.value)}>{TYPES.filter(t=>t!=='All').map(t=><option key={t}>{t}</option>)}</select></label>
           <label>City or general region *<input required maxLength={70} placeholder="Central Ohio" value={form.area} onChange={e=>setField('area',e.target.value)}/></label>
           <label>About this idea<textarea rows={4} maxLength={500} placeholder="What kind of connection would this create?" value={form.description} onChange={e=>setField('description',e.target.value)}/></label>
+          {draftError&&<p className="lc-dialog-note" role="alert">{draftError}</p>}
           <div className="lc-form-actions"><button type="button" className="lc-outline" onClick={()=>setOpen(false)}>Cancel</button><button className="lc-primary" type="submit"><Check size={16}/> Save private draft</button></div>
         </form>
       </section>
