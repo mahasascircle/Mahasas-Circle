@@ -192,3 +192,52 @@
 @media (prefers-reduced-motion: reduce) {
   .gather-illustration { transition: none; }
 }
+
+
+/* Landing-art harmony pass: use the approved art as a subtle environmental texture,
+   preserving readable labels, the existing illustrated cards and every interaction. */
+.gather-page {
+  background:
+    radial-gradient(ellipse at 50% 0%, #2f193f 0, transparent 37%),
+    #090610;
+}
+.gather-hero {
+  background: radial-gradient(ellipse at 50% 42%, #49345c, #140d20 64%, #090711);
+}
+.gather-hero::before {
+  background:
+    url('/assets/landing-sanctuary.png') center 52% / cover no-repeat;
+  opacity: .16;
+  filter: blur(7px) saturate(.7);
+}
+.gather-arch {
+  border-color: #90789891;
+  box-shadow:
+    0 0 0 8px #25152bba,
+    inset 0 0 0 3px #e6caa95e,
+    inset 0 0 85px #ad84cc38;
+}
+.gather-card {
+  background: linear-gradient(140deg, #201529, #110d19);
+  border-color: #bea0b561;
+  box-shadow: 0 16px 40px #0004;
+}
+.gather-card-visual { border-bottom: 1px solid #e0c8a143; }
+.gather-card-ribbon {
+  background: rgba(13, 7, 23, .86);
+  border-color: #e0cbaa83;
+}
+.gather-tabs button.active { background: #634279; border-color: #e5c5df; }
+.gather-preview-note {
+  border-color: #b194b177;
+  background: #21182b;
+}
+.gather-last-call {
+  border-color: #d3b59685;
+  background:
+    radial-gradient(circle at 7% 40%, #6d478147, transparent 37%),
+    linear-gradient(110deg, #2c1c37, #130c1d);
+}
+@media (prefers-reduced-motion: reduce) {
+  .gather-hero::before { filter: none; }
+}
