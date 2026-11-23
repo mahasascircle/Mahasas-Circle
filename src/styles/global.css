@@ -1204,3 +1204,70 @@ button,input,textarea{font:inherit}button{color:inherit}.eyebrow{text-transform:
 @media(prefers-reduced-motion:reduce){
   .event-demo-stage,.event-demo-art,.event-demo-copy,.event-demo-focus{animation:none!important}
 }
+
+/* PERSONAL TORCH — daily private practice */
+.personal-torch-page{position:relative;overflow-x:hidden;background:radial-gradient(circle at 18% 10%,rgba(106,42,142,.2),transparent 28%),radial-gradient(circle at 82% 42%,rgba(115,50,144,.1),transparent 30%),#040107}
+.personal-torch-hero{width:min(1080px,calc(100% - 32px));margin:30px auto 18px;padding:clamp(22px,5vw,48px);display:grid;grid-template-columns:minmax(250px,.75fr) minmax(300px,1.25fr);align-items:center;gap:clamp(24px,6vw,72px);border:1px solid var(--line);border-radius:28px;background:linear-gradient(120deg,rgba(25,12,34,.96),rgba(8,4,13,.88));box-shadow:0 28px 90px rgba(0,0,0,.42);overflow:hidden}
+.personal-torch-art{display:grid;justify-items:center;align-content:center;min-height:480px;filter:drop-shadow(0 28px 32px rgba(0,0,0,.45))}
+.personal-torch-art .large-flame{transition:filter .4s ease,transform .4s ease}
+.personal-torch-art .large-flame.tended{filter:drop-shadow(0 0 46px rgba(215,145,250,.82));transform:scale(1.06)}
+.personal-torch-copy h1{margin:6px 0 14px;font:400 clamp(42px,7vw,72px) Georgia,serif;line-height:1}
+.personal-torch-copy blockquote{margin:0 0 20px;max-width:620px;color:#dfd2e5;font:italic clamp(18px,2.2vw,23px)/1.55 Georgia,serif}
+.torch-private-note{display:flex;align-items:center;gap:8px;width:max-content;max-width:100%;padding:9px 12px;border:1px solid rgba(225,181,110,.2);border-radius:999px;color:#d6c8dd;background:rgba(225,181,110,.055);font-size:13px}
+.torch-tend-button{max-width:360px;margin-top:22px}
+.torch-tend-button:disabled{cursor:default;border-color:rgba(225,181,110,.45);background:linear-gradient(180deg,#543861,#33203c);color:#f0e5f3}
+.torch-text-button{margin-top:12px;padding:8px 0;border:0;background:transparent;color:#d9a5f4;display:flex;gap:7px;align-items:center;cursor:pointer}
+.torch-notice{width:min(880px,calc(100% - 36px));margin:14px auto;display:flex;align-items:center;gap:9px;padding:12px 14px;border:1px solid rgba(189,120,239,.32);border-radius:13px;background:#180c22;color:#ebdfef}
+.torch-notice span{flex:1}
+.torch-notice>button{display:grid;place-items:center;border:0;background:transparent;color:#d6c8dd;cursor:pointer}
+.personal-torch-page .torch-details{max-width:1080px;padding:0}
+.personal-torch-page .torch-details article{min-height:92px;display:grid;place-content:center;background:linear-gradient(145deg,#150b1d,#0b0510)}
+.personal-torch-page .torch-details strong{font-size:clamp(20px,3vw,27px)}
+.torch-practice-grid{width:min(1080px,calc(100% - 32px));margin:18px auto;display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.torch-practice-card{padding:clamp(20px,4vw,30px);border:1px solid var(--line);border-radius:22px;background:linear-gradient(145deg,rgba(20,10,29,.98),rgba(8,4,13,.97))}
+.torch-practice-card h2,.torch-history h2{margin:4px 0 8px;font:400 clamp(26px,4vw,36px) Georgia,serif}
+.torch-practice-card>.muted{margin:0 0 20px;line-height:1.55}
+.torch-focus-options{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+.torch-focus-options button{min-height:92px;padding:13px;display:flex;align-items:flex-start;gap:10px;text-align:left;border:1px solid var(--line);border-radius:14px;background:rgba(255,255,255,.025);cursor:pointer}
+.torch-focus-options button:hover,.torch-focus-options button:focus-visible{border-color:#a766cf}
+.torch-focus-options button.selected{border-color:#c47ff0;background:rgba(189,120,239,.14);box-shadow:0 0 24px rgba(189,120,239,.13)}
+.torch-focus-options button>span{display:grid;gap:4px}
+.torch-focus-options strong{font:18px Georgia,serif}
+.torch-focus-options small{color:var(--muted);font-size:12px;line-height:1.4}
+.torch-reflection-form{display:grid;gap:9px}
+.torch-reflection-form label{color:#dfd2e5;font-size:13px}
+.torch-reflection-form textarea{width:100%;resize:vertical;padding:13px;border:1px solid var(--line);border-radius:14px;background:#08040d;color:#fff;line-height:1.55}
+.torch-reflection-form textarea:focus{outline:2px solid rgba(189,120,239,.65);outline-offset:2px}
+.torch-reflection-form>div{display:flex;justify-content:space-between;align-items:center;gap:12px}
+.torch-reflection-form>div>span{color:var(--muted);font-size:12px}
+.torch-reflection-form button{padding:11px 14px;display:flex;align-items:center;gap:8px;border:1px solid #a95ed2;border-radius:11px;background:#5b2a75;color:#fff;cursor:pointer}
+.torch-reflection-form button:disabled{cursor:default;opacity:.45}
+.torch-history{width:min(1080px,calc(100% - 32px));margin:18px auto;padding:clamp(20px,4vw,30px);border:1px solid var(--line);border-radius:22px;background:rgba(13,6,19,.86)}
+.torch-history-heading{display:flex;align-items:end;justify-content:space-between;gap:20px}
+.torch-history-heading>span{color:var(--muted);font-size:12px}
+.torch-history-list{display:grid;gap:9px;margin-top:16px}
+.torch-history-list article{position:relative;padding:16px 46px 16px 16px;border:1px solid rgba(235,225,241,.13);border-radius:14px;background:rgba(255,255,255,.025)}
+.torch-history-list article>p{margin:8px 0 0;color:#eee4f1;line-height:1.6;white-space:pre-wrap}
+.torch-history-list article>button{position:absolute;right:12px;top:12px;width:30px;height:30px;display:grid;place-items:center;border:1px solid var(--line);border-radius:50%;background:transparent;color:var(--muted);cursor:pointer}
+.torch-history-meta{display:flex;gap:10px;align-items:center;color:var(--muted);font-size:12px}
+.torch-history-meta strong{padding:3px 8px;border-radius:999px;background:rgba(189,120,239,.12);color:#dcaef5;font-size:10px;text-transform:uppercase;letter-spacing:.08em}
+.torch-empty-state{min-height:130px;margin-top:15px;display:grid;place-items:center;align-content:center;gap:8px;border:1px dashed rgba(235,225,241,.2);border-radius:14px;color:#c9b8d0}
+.torch-empty-state p{margin:0}
+.personal-torch-belief{text-align:center;margin:26px auto 10px;padding:0 18px}
+@media(max-width:780px){
+  .personal-torch-hero{grid-template-columns:1fr;text-align:center}
+  .personal-torch-art{min-height:420px}
+  .personal-torch-copy blockquote{margin-left:auto;margin-right:auto}
+  .torch-private-note,.torch-tend-button,.torch-text-button{margin-left:auto;margin-right:auto}
+  .torch-practice-grid{grid-template-columns:1fr}
+  .personal-torch-page .torch-details{width:calc(100% - 32px)}
+}
+@media(max-width:520px){
+  .personal-torch-hero{margin-top:14px;padding:22px 14px}
+  .personal-torch-art{min-height:400px;transform:scale(.9);margin:-26px 0}
+  .personal-torch-page .torch-details{grid-template-columns:1fr 1fr}
+  .torch-focus-options{grid-template-columns:1fr}
+  .torch-history-heading{align-items:start;flex-direction:column}
+  .torch-reflection-form>div{align-items:flex-end}
+  .torch-reflection-form button{max-width:220px;justify-content:center}
+}
